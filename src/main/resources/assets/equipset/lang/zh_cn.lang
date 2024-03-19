@@ -1,0 +1,26 @@
+
+key.equipset=装备预设
+key.category.equipset.setinvetory=预设管理界面
+key.category.equipset.setchange=顺序使用预设
+
+key.category.equipset.setchange.select_0=使用预设 1
+key.category.equipset.setchange.select_1=使用预设 2
+key.category.equipset.setchange.select_2=使用预设 3
+key.category.equipset.setchange.select_3=使用预设 4
+key.category.equipset.setchange.select_4=使用预设 5
+key.category.equipset.setchange.select_5=使用预设 6
+key.category.equipset.setchange.select_6=使用预设 7
+key.category.equipset.setchange.select_7=使用预设 8
+key.category.equipset.setchange.select_8=使用预设 9
+key.category.equipset.setchange.select_9=使用预设 10
+
+tip.equipset.total=使用装备预设=
+tip.equipset.lack_part=, 缺失了某些装备
+tip.equipset.curse_part=, 穿戴了绑定诅咒的装备
+tip.equipset.none_set=找不到目标预设
+tip.equipser.lock_set=无法使用被锁定的预设
+
+button.equipset.save=
+button.equipset.lock=LOCK
+button.equipset.unlock=unlock
+label.equipset.manager=预设管理
