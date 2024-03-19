@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import oshi.util.tuples.Pair;
 
 @OnlyIn(Dist.CLIENT)
-public class IButton extends Button {
+public class  IButton extends Button {
     private @Nullable Pair<ResourceLocation, Integer> Common;
     private @Nullable Pair<ResourceLocation, Integer> Hover;
     private boolean showText = true;

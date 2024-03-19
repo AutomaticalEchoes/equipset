@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 public class CommonEvents {
     @SubscribeEvent
     public static void commands(RegisterCommandsEvent event){
-        UsePresetCommand.register(event.getDispatcher());
+        UsePresetCommand.registerServer(event.getDispatcher());
     }
 
 

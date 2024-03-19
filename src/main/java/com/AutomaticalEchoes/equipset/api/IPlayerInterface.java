@@ -1,6 +1,8 @@
 package com.AutomaticalEchoes.equipset.api;
 
 
+import net.minecraft.server.level.ServerPlayer;
+
 public interface IPlayerInterface {
     PresetManager getEquipmentSets();
     void nextSet();
@@ -8,4 +10,5 @@ public interface IPlayerInterface {
     void updateSet(int num, int cases);
     void updateSetName(int num, String s);
     void updatePartStatus(int num, String partName, boolean enable);
+    void restoreFrom(ServerPlayer serverPlayer);
 }

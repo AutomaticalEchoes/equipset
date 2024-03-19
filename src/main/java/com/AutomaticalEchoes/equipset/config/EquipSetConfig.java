@@ -8,7 +8,6 @@ public class EquipSetConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> CURSE_CHECK;
     public static final ForgeConfigSpec.ConfigValue<Integer> PRESET_NUM;
 
-
     public static final ForgeConfigSpec.ConfigValue<Boolean> KEYMAPPING_R;
     public static final ForgeConfigSpec.ConfigValue<Boolean> KEYMAPPING_NUMS;
     static {

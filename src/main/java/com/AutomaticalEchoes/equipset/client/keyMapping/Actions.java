@@ -13,6 +13,6 @@ public class Actions {
     }
 
     public static void SendUsePreset(Integer nums) {
-        Minecraft.getInstance().player.chat("/eqs use_preset %d".formatted(nums));
+        Minecraft.getInstance().player.command("eqs use_preset %d".formatted(nums));
     }
 }

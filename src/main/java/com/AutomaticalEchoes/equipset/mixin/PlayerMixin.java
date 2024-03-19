@@ -32,7 +32,7 @@ import java.util.OptionalInt;
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity implements IPlayerInterface {
     private final PresetManager equipmentSets = PresetManager.defaultManager();
-    private int focus;
+    private int focus = 0;
     private static final EntityDataAccessor<PresetManager> SETS = SynchedEntityData.defineId(Player.class , EquipSet.SETS_SERIALIZER);
     protected PlayerMixin(EntityType<? extends LivingEntity> p_20966_, Level p_20967_) {
         super(p_20966_, p_20967_);
@@ -153,12 +153,15 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
             CommonModEvents.NetWork.sendTo(new FeedBack(Utils.NoneSet), serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
         }
-
-
     }
 
     private void onSetUpdate(){
         this.entityData.set(SETS, equipmentSets);
+    }
+
+    public void restoreFrom(ServerPlayer serverPlayer){
+        ((IPlayerInterface)this).getEquipmentSets().copyFrom(((IPlayerInterface) serverPlayer).getEquipmentSets());
+        onSetUpdate();
     }
 
     @Override
