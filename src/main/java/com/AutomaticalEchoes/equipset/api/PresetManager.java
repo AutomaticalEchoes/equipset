@@ -117,6 +117,11 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
         return i;
     }
 
+    public void copyFrom(PresetManager presetManager){
+        this.clear();
+        this.putAll(presetManager);
+    }
+
     public static PresetManager defaultManager(){
         PresetManager presetManager = new PresetManager();
         for (int i = 0; i < ConfigValue.NUMS; i++) {

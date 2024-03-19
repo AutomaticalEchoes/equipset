@@ -6,7 +6,8 @@
   "refmap": "equipset.refmap.json",
   "plugin": "com.AutomaticalEchoes.equipset.mixin.MixinPlugin",
   "mixins": [
-    "PlayerMixin"
+    "PlayerMixin",
+    "ServerPlayerMixin"
   ],
   "client": [
   ],
