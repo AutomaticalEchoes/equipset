@@ -13,6 +13,7 @@ public class Actions {
     }
 
     public static void SendUsePreset(Integer nums) {
-        Minecraft.getMinecraft().player.sendChatMessage("/eqs use_preset %d".replace("%d",String.valueOf(nums)));
+        if(nums == null) Minecraft.getMinecraft().player.sendChatMessage("/eqs use_preset");
+        else Minecraft.getMinecraft().player.sendChatMessage("/eqs use_preset %d".replace("%d",String.valueOf(nums)));
     }
 }

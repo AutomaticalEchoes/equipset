@@ -20,6 +20,7 @@ public final class FeedBack implements IMessage, IMessageHandler<FeedBack,IMessa
         super();
         this.code = code;
     }
+
     public FeedBack(int code, Integer num) {
         super();
         this.code = code;
@@ -46,10 +47,11 @@ public final class FeedBack implements IMessage, IMessageHandler<FeedBack,IMessa
         buf.writeInt(num);
     }
 
+
     @Override
     public IMessage onMessage(FeedBack message, MessageContext ctx) {
         Minecraft.getMinecraft().player.inventory.markDirty();
-        Minecraft.getMinecraft().ingameGUI.setOverlayMessage(Utils.BuildComponent(message.code, num),false);
+        Minecraft.getMinecraft().ingameGUI.setOverlayMessage(Utils.BuildComponent(message.code, message.num),false);
         return null;
     }
 }

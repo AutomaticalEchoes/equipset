@@ -14,7 +14,7 @@ key.category.equipset.setchange.select_7=使用预设 8
 key.category.equipset.setchange.select_8=使用预设 9
 key.category.equipset.setchange.select_9=使用预设 10
 
-tip.equipset.total=使用装备预设=
+tip.equipset.total=使用装备预设：
 tip.equipset.lack_part=, 缺失了某些装备
 tip.equipset.curse_part=, 穿戴了绑定诅咒的装备
 tip.equipset.none_set=找不到目标预设

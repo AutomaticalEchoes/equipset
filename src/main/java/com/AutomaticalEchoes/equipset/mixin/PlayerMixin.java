@@ -27,7 +27,7 @@ import java.util.OptionalInt;
 @Mixin(EntityPlayer.class)
 public abstract class PlayerMixin extends EntityLivingBase implements IPlayerInterface {
     private final PresetManager equipmentSets = PresetManager.defaultManager();
-    private int focus;
+    private int focus = 0;
     private static final DataParameter<PresetManager> SETS = EntityDataManager.createKey(EntityPlayer.class , EquipSet.SETS_SERIALIZER);
 
     public PlayerMixin(World worldIn) {
@@ -47,7 +47,6 @@ public abstract class PlayerMixin extends EntityLivingBase implements IPlayerInt
             equipmentSets.fromTag(suitTag);
         }
         onSetUpdate();
-        focus = compoundTag.getInteger("Focus");
     }
 
     @Inject(method = {"writeEntityToNBT"},at = {@At("RETURN")})

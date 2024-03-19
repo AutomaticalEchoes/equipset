@@ -28,7 +28,7 @@ public class KeyMappings {
                     KeyConflictContext.IN_GAME,
                     KeyModifier.NONE,
                     Keyboard.KEY_R,
-                    "key.equipset"),() -> Actions.SendUsePreset(-1));
+                    "key.equipset"),() -> Actions.SendUsePreset(null));
         }
 
         if(EquipSetConfig.KEYMAPPING_NUMS){
