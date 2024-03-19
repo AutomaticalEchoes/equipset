@@ -67,6 +67,11 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
         this.feedBack.append(new TextComponent(name).withStyle(ChatFormatting.ITALIC));
     }
 
+    public void copyFrom(PresetManager presetManager){
+        this.clear();
+        this.putAll(presetManager);
+    }
+
     public CompoundTag toTag() {
         CompoundTag compoundtag = new CompoundTag();
         int i = 0;

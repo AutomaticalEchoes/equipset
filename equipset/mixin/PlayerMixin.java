@@ -161,6 +161,11 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
         this.entityData.set(SETS, equipmentSets);
     }
 
+    public void restoreFrom(ServerPlayer serverPlayer){
+        ((IPlayerInterface)this).getEquipmentSets().copyFrom(((IPlayerInterface) serverPlayer).getEquipmentSets());
+        onSetUpdate();
+    }
+
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> p_21104_) {
         super.onSyncedDataUpdated(p_21104_);

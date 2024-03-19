@@ -31,8 +31,9 @@ public class KeyMappings {
                     InputConstants.getKey(InputConstants.KEY_R,0 ),
                     "key.equipset"),() -> Actions.SendUsePreset(-1));
         }
+
         if(ConfigValue.KEYMAPPING_NUMS){
-            for (int i = 0; i < EquipSetConfig.PRESET_NUM.get(); i++) {
+            for (int i = 0; i < ConfigValue.NUMS; i++) {
                 int finalI = i;
                 RegisterKeyMapping(new KeyMapping("key.category.equipset.setchange.select_%d".formatted(i),
                         KeyConflictContext.IN_GAME,
