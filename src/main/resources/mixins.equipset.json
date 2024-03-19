@@ -3,7 +3,7 @@
   "package": "com.AutomaticalEchoes.equipset.mixin",
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.7",
-  "refmap": "equipset.refmap.json",
+  "refmap": "refmap.equipset.json",
   "plugin": "com.AutomaticalEchoes.equipset.mixin.MixinPlugin",
   "mixins": [
     "PlayerMixin",
