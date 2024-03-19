@@ -90,8 +90,8 @@ public class EquipmentSettingsScreen extends InventoryEffectRenderer {
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
         if(managerWeight.textboxKeyTyped(typedChar,keyCode)) return;
-        if(KeyMappings.CALL_SET_INVENTORY_KEY.isKeyDown()){
-            this.onGuiClosed();
+        if(KeyMappings.CALL_SET_INVENTORY_KEY.getKeyCode() == keyCode){
+            this.mc.displayGuiScreen(null);
         }
         super.keyTyped(typedChar, keyCode);
     }
