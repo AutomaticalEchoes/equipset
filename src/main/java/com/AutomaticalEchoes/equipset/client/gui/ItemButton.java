@@ -4,6 +4,7 @@ import com.AutomaticalEchoes.equipset.api.PresetEquipPart;
 import com.AutomaticalEchoes.equipset.api.PresetEquipSet;
 import com.AutomaticalEchoes.equipset.common.CommonModEvents;
 import com.AutomaticalEchoes.equipset.common.network.UpdatePresetPartStatus;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
@@ -12,6 +13,9 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -52,7 +56,7 @@ public class ItemButton extends Button {
         blit(p_281670_, x - 1, y - 1, 0, enable? 0 : 40,18, 20, 128, 128);
 
         if(enable && !isEmpty){
-            Minecraft.getInstance().getItemRenderer().renderGuiItem(part.getSettingNeed(), x, y);
+            renderItem(p_281670_);
         }
         if((isEmpty || !enable) && EMPTY != null){
             Pair<ResourceLocation, ResourceLocation> pair = getNoItemIcon();
@@ -85,5 +89,19 @@ public class ItemButton extends Button {
     public void info(PresetEquipSet set){
         this.part = set.get(PartName);
     }
+
+    private void renderItem(PoseStack p_281670_){
+        p_281670_.pushPose();
+        p_281670_.translate(x + 8.0D, y + 8.0D, 0.0D);
+        p_281670_.scale(1.0F, -1.0F, 1.0F);
+        p_281670_.scale(16.0F, 16.0F, 16.0F);
+        Lighting.setupForFlatItems();
+        MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+        Minecraft.getInstance().getItemRenderer().renderStatic(part.getSettingNeed(), ItemTransforms.TransformType.GUI, 15728880, OverlayTexture.NO_OVERLAY, p_281670_, multibuffersource$buffersource, 0);
+        p_281670_.popPose();
+        multibuffersource$buffersource.endBatch();
+
+    }
+
 
 }

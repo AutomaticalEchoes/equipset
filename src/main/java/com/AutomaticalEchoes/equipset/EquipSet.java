@@ -35,7 +35,7 @@ public class EquipSet
         EntityDataSerializers.registerSerializer(SETS_SERIALIZER);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EquipSetConfig.SPEC,"equipsuit-config.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EquipSetConfig.SPEC,"equipset-config.toml");
     }
 
 }
