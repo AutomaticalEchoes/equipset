@@ -1,0 +1,27 @@
+{
+  "key.equipset": "EquipSet",
+  "key.category.equipset.setinvetory": "open preset screen",
+  "key.category.equipset.setchange": "change set",
+  "key.category.equipset.setchange.select_0": "quick change 1",
+  "key.category.equipset.setchange.select_1": "quick change 2",
+  "key.category.equipset.setchange.select_2": "quick change 3",
+  "key.category.equipset.setchange.select_3": "quick change 4",
+  "key.category.equipset.setchange.select_4": "quick change 5",
+  "key.category.equipset.setchange.select_5": "quick change 6",
+  "key.category.equipset.setchange.select_6": "quick change 7",
+  "key.category.equipset.setchange.select_7": "quick change 8",
+  "key.category.equipset.setchange.select_8": "quick change 9",
+  "key.category.equipset.setchange.select_9": "quick change 10",
+
+
+  "tip.equipset.total": "use preset: ",
+  "tip.equipset.lack_part": ", miss something",
+  "tip.equipset.curse_part": ", wearing curse equipment",
+  "tip.equipset.none_set": "could not find target preset",
+  "tip.equipser.lock_set": "can not use locked preset",
+
+  "button.equipset.save": "",
+  "button.equipset.lock": "LOCK",
+
+  "label.equipset.manager": "Preset Manager"
+}

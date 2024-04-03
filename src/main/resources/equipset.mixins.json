@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "com.AutomaticalEchoes.equipset.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "equipset.refmap.json",
+  "plugin": "com.AutomaticalEchoes.equipset.mixin.MixinPlugin",
+  "mixins": [
+    "PlayerMixin",
+    "ServerPlayerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
