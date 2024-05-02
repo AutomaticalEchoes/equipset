@@ -58,23 +58,18 @@ public abstract class PlayerMixin extends EntityLivingBase implements IPlayerInt
         return this.world.isRemote ? this.dataManager.get(SETS) : this.equipmentSets;
     }
 
-    public void useSet(int num, boolean addWhileLock) {
+    public void useSet(int num, boolean lockCheck) {
         if(this.world.isRemote) return;
         EntityPlayerMP serverPlayer = (EntityPlayerMP) (Object) this;
         int feedBack = 4;
         try {
             if(equipmentSets.size() == 0) throw new IndexOutOfBoundsException("none sets loaded");
             int canUse = num;
-            if(equipmentSets.get(num).isLock()){
-                if(addWhileLock){
-                    int[] ints = equipmentSets.unLockedSets();
-                    if(ints.length == 0) throw new IndexOutOfBoundsException("none unlock set");
-                    OptionalInt first = Arrays.stream(ints).filter(foInt -> foInt > focus).findFirst();
-                    canUse = first.isPresent()? first.getAsInt() : ints[0];
-                }else{
-                    feedBack = 2;
-                    throw new IndexOutOfBoundsException("set locked");
-                }
+            if(lockCheck && equipmentSets.get(num).isLock()){
+                int[] ints = equipmentSets.unLockedSets();
+                if(ints.length == 0) throw new IndexOutOfBoundsException("none unlock set");
+                OptionalInt first = Arrays.stream(ints).filter(foInt -> foInt > focus).findFirst();
+                canUse = first.isPresent()? first.getAsInt() : ints[0];
             }
             feedBack = equipmentSets.UseSet(serverPlayer, this.focus, canUse);
             this.focus = canUse;

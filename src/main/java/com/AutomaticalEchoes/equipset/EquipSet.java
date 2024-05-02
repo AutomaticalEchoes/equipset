@@ -26,7 +26,7 @@ public class EquipSet
     public static final String MODID = "equipset";
     // Directly reference a slf4j logger
     public static final String NAME = "EquipSet";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.1.1";
     public static final SetsSerializer SETS_SERIALIZER = new SetsSerializer();
     // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
 //    public EquipSet()

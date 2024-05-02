@@ -13,6 +13,7 @@ import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 public class KeyMappings {
+    static boolean ISINT = false;
     public static final HashMap<KeyBinding,Runnable> KEY_MAPPING = new HashMap<>();
     public static final int[] CONSTANTS = new int[]{Keyboard.KEY_1, Keyboard.KEY_2, Keyboard.KEY_3, Keyboard.KEY_4, Keyboard.KEY_5, Keyboard.KEY_6, Keyboard.KEY_7, Keyboard.KEY_8, Keyboard.KEY_O, Keyboard.KEY_P};
     public static final KeyBinding CALL_SET_INVENTORY_KEY = RegisterKeyBinding(new KeyBinding("key.category.equipset.setinvetory",
@@ -23,6 +24,7 @@ public class KeyMappings {
 
 
     public static void Init(){
+        if(ISINT) return;
         if(EquipSetConfig.KEYMAPPING_R){
             RegisterKeyBinding(new KeyBinding("key.category.equipset.setchange",
                     KeyConflictContext.IN_GAME,
@@ -41,6 +43,7 @@ public class KeyMappings {
                         "key.equipset"), () -> Actions.SendUsePreset(finalI));
             }
         }
+        ISINT = true;
     }
 
     public static KeyBinding RegisterKeyBinding(KeyBinding keyBinding, Runnable runnable){
