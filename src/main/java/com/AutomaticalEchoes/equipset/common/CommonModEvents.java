@@ -35,6 +35,7 @@ public class CommonModEvents {
     public static void Config(ModConfigEvent event){
         if((event instanceof ModConfigEvent.Loading || event instanceof ModConfigEvent.Reloading) && event.getConfig().getModId().equals(EquipSet.MODID)){
             ConfigValue.reInit();
+            KeyMappings.Init();
         }
     }
 

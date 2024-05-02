@@ -16,7 +16,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-version = '1.1-forge-1.19.2-43.3.0'
+version = '1.1.1-forge-1.19.2-43.3.0'
 group = 'com.automaticalechoes.equipset' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'equipset'
 

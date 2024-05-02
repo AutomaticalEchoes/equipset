@@ -24,6 +24,7 @@ public class KeyMappings {
 
 
     public static void Init(){
+        KEY_MAPPING.clear();
         if(ConfigValue.KEYMAPPING_R){
             RegisterKeyMapping(new KeyMapping("key.category.equipset.setchange",
                     KeyConflictContext.IN_GAME,
