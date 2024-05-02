@@ -14,6 +14,7 @@ import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
 public class KeyMappings {
+    static boolean ISINIT = false;
     public static final HashMap<KeyMapping,Runnable> KEY_MAPPING = new HashMap<>();
     public static final int[] CONSTANTS = new int[]{InputConstants.KEY_1, InputConstants.KEY_2, InputConstants.KEY_3, InputConstants.KEY_4, InputConstants.KEY_5, InputConstants.KEY_6, InputConstants.KEY_7, InputConstants.KEY_8, InputConstants.KEY_O, InputConstants.KEY_P};
     public static final KeyMapping CALL_SET_INVENTORY_KEY = RegisterKeyMapping(new KeyMapping("key.category.equipset.setinvetory",
@@ -24,7 +25,7 @@ public class KeyMappings {
 
 
     public static void Init(){
-        KEY_MAPPING.clear();
+        if(ISINIT) return;
         if(ConfigValue.KEYMAPPING_R){
             RegisterKeyMapping(new KeyMapping("key.category.equipset.setchange",
                     KeyConflictContext.IN_GAME,
@@ -42,6 +43,7 @@ public class KeyMappings {
                         "key.equipset"), () -> Actions.SendUsePreset(finalI));
             }
         }
+        ISINIT  = true;
     }
 
     public static KeyMapping RegisterKeyMapping(KeyMapping keyMapping, Runnable runnable){
