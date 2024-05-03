@@ -31,7 +31,7 @@ public class EquipSet
         // Register the commonSetup method for modloading
         ContainerType.init();
         PresetEquipSet.init();
-        KeyMappings.Init();
+
         EntityDataSerializers.registerSerializer(SETS_SERIALIZER);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
