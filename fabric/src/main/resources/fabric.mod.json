@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "equipset",
+  "version": "${version}",
+
+  "name": "EquipSet",
+  "description": "",
+  "authors": [],
+  "contact": {},
+
+  "license": "All Rights Reserved",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "automaticalechoes.equipset.equipset.fabric.EquipSetFabric"
+    ]
+  },
+  "mixins": [
+    "equipset.mixins.json",
+    "equipset-common.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": ">=1.20.1"
+  }
+}
