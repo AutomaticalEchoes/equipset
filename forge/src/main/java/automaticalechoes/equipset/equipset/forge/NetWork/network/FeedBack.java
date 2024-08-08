@@ -1,14 +1,16 @@
-package automaticalechoes.equipset.equipset.common.network;
+package automaticalechoes.equipset.equipset.forge.NetWork.network;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkEvent;
 
-public record FeedBack(Component component) implements Packet<EquipSetPacketListener> {
+import java.util.function.Supplier;
+
+public record FeedBack(Component component){
     public static void encode(FeedBack msg, FriendlyByteBuf packetBuffer) {
-
+        packetBuffer.writeComponent(msg.component);
     }
 
     public static FeedBack decode(FriendlyByteBuf packetBuffer) {
@@ -23,15 +25,5 @@ public record FeedBack(Component component) implements Packet<EquipSetPacketList
 
     public void handleMessage(FeedBack msg, ServerPlayer sender) {
         Minecraft.getInstance().gui.setOverlayMessage(msg.component,false);
-    }
-
-    @Override
-    public void write(FriendlyByteBuf friendlyByteBuf) {
-        friendlyByteBuf.writeComponent(msg.component);
-    }
-
-    @Override
-    public void handle(EquipSetPacketListener packetListener) {
-
     }
 }
