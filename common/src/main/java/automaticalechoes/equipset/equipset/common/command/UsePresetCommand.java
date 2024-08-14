@@ -24,7 +24,7 @@ public class UsePresetCommand {
         if(id == -1){
             player.equipSet$nextSet();
         }else {
-            player.useSet(id, false);
+            player.equipSet$useSet(id, false);
         }
 
         return 1;

@@ -17,25 +17,25 @@ public class PacketHandler {
                 .networkProtocolVersion(()->PROTOCOL_VERSION)
                 .simpleChannel();
         CommonModEvents.NetWork=INSTANCE;
-        INSTANCE.messageBuilder(FeedBack.class,1)
-                .encoder(FeedBack::encode)
-                .decoder(FeedBack::decode)
-                .consumerMainThread(FeedBack::onMessage)
+        INSTANCE.messageBuilder(ForgeFeedBack.class,1)
+                .encoder(ForgeFeedBack::encode)
+                .decoder(ForgeFeedBack::decode)
+                .consumerMainThread(ForgeFeedBack::onMessage)
                 .add();
-        INSTANCE.messageBuilder(UpdatePreset.class,3)
-                .encoder(UpdatePreset::encode)
-                .decoder(UpdatePreset::decode)
-                .consumerMainThread(UpdatePreset::onMessage)
+        INSTANCE.messageBuilder(ForgeUpdatePreset.class,3)
+                .encoder(ForgeUpdatePreset::encode)
+                .decoder(ForgeUpdatePreset::decode)
+                .consumerMainThread(ForgeUpdatePreset::onMessage)
                 .add();
-        INSTANCE.messageBuilder(UpdatePresetPartStatus.class,4)
-                .encoder(UpdatePresetPartStatus::encode)
-                .decoder(UpdatePresetPartStatus::decode)
-                .consumerMainThread(UpdatePresetPartStatus::onMessage)
+        INSTANCE.messageBuilder(ForgeUpdatePresetPartStatus.class,4)
+                .encoder(ForgeUpdatePresetPartStatus::encode)
+                .decoder(ForgeUpdatePresetPartStatus::decode)
+                .consumerMainThread(ForgeUpdatePresetPartStatus::onMessage)
                 .add();
-        INSTANCE.messageBuilder(UpdateSetName.class,5)
-                .encoder(UpdateSetName::encode)
-                .decoder(UpdateSetName::decode)
-                .consumerMainThread(UpdateSetName::onMessage)
+        INSTANCE.messageBuilder(ForgeUpdateSetName.class,5)
+                .encoder(ForgeUpdateSetName::encode)
+                .decoder(ForgeUpdateSetName::decode)
+                .consumerMainThread(ForgeUpdateSetName::onMessage)
                 .add();
         return INSTANCE;
     }

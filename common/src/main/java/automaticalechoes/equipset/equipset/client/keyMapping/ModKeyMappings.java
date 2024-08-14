@@ -1,6 +1,6 @@
 package automaticalechoes.equipset.equipset.client.keyMapping;
 
-import com.AutomaticalEchoes.equipset.config.ConfigValue;
+import automaticalechoes.equipset.equipset.config.Config;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,13 +20,13 @@ public class ModKeyMappings {
 
     public static void Init(){
         if(ISINIT) return;
-        if(ConfigValue.KEYMAPPING_R){
+        if(Config.KeymappingR()){
             RegisterKeyMapping(new KeyMapping("key.category.equipset.setchange",
                     InputConstants.KEY_R,
                     "key.equipset"),() -> Actions.SendUsePreset(-1));
         }
-        if(ConfigValue.KEYMAPPING_NUMS){
-            for (int i = 0; i < ConfigValue.NUMS; i++) {
+        if(Config.KeymappingNums()){
+            for (int i = 0; i < Config.NUMS(); i++) {
                 int finalI = i;
                 RegisterKeyMapping(new KeyMapping("key.category.equipset.setchange.select_%d".formatted(i),
                         CONSTANTS[i],

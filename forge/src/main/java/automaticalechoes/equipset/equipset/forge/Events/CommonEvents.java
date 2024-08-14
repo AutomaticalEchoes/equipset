@@ -1,6 +1,6 @@
 package automaticalechoes.equipset.equipset.forge.Events;
 
-import com.AutomaticalEchoes.equipset.common.command.UsePresetCommand;
+import automaticalechoes.equipset.equipset.common.command.UsePresetCommand;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

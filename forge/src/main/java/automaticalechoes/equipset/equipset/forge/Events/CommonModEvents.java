@@ -1,10 +1,9 @@
 package automaticalechoes.equipset.equipset.forge.Events;
 
+import automaticalechoes.equipset.equipset.EquipSet;
 import automaticalechoes.equipset.equipset.client.keyMapping.ModKeyMappings;
-import com.AutomaticalEchoes.equipset.EquipSet;
-import com.AutomaticalEchoes.equipset.client.keyMapping.KeyMappings;
-import com.AutomaticalEchoes.equipset.common.network.PacketHandler;
-import com.AutomaticalEchoes.equipset.config.ConfigValue;
+import automaticalechoes.equipset.equipset.forge.NetWork.network.ForgeNetworkImp;
+import automaticalechoes.equipset.equipset.forge.NetWork.network.PacketHandler;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +14,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.apache.commons.lang3.ArrayUtils;
 
+import java.util.Optional;
+
 @Mod.EventBusSubscriber(modid = EquipSet.MODID,bus=Mod.EventBusSubscriber.Bus.MOD)
 public class CommonModEvents {
     public static SimpleChannel NetWork;
@@ -23,6 +24,8 @@ public class CommonModEvents {
     {
         event.enqueueWork(()->{
             NetWork = PacketHandler.RegisterPacket();
+            ForgeNetworkImp forgeNetworkImp = new ForgeNetworkImp();
+            EquipSet.NETWORK = Optional.of(forgeNetworkImp);
         });
 
     }
@@ -30,14 +33,6 @@ public class CommonModEvents {
     @SubscribeEvent
     public static void Load(FMLLoadCompleteEvent event) {
         Minecraft.getInstance().options.keyMappings = ArrayUtils.addAll(Minecraft.getInstance().options.keyMappings, ModKeyMappings.KEY_MAPPING.keySet().toArray(new KeyMapping[0]));
-    }
-
-    @SubscribeEvent
-    public static void Config(ModConfigEvent event){
-        if((event instanceof ModConfigEvent.Loading || event instanceof ModConfigEvent.Reloading) && event.getConfig().getModId().equals(EquipSet.MODID)){
-            ConfigValue.reInit();
-            KeyMappings.Init();
-        }
     }
 
 }

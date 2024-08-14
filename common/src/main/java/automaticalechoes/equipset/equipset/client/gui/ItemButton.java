@@ -1,10 +1,9 @@
 package automaticalechoes.equipset.equipset.client.gui;
 
 
+import automaticalechoes.equipset.equipset.EquipSet;
 import automaticalechoes.equipset.equipset.api.PresetEquipPart;
 import automaticalechoes.equipset.equipset.api.PresetEquipSet;
-import com.AutomaticalEchoes.equipset.common.CommonModEvents;
-import com.AutomaticalEchoes.equipset.common.network.UpdatePresetPartStatus;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -75,7 +74,7 @@ public class ItemButton extends Button {
     @Override
     public void onPress() {
         if(part != null)
-            CommonModEvents.NetWork.sendToServer(new UpdatePresetPartStatus(num, PartName, !part.isEnable()));
+            EquipSet.NETWORK.ifPresent(net -> net.SendUpdatePresetPartStatus(num, PartName, !part.isEnable()));
     }
 
     public void info(PresetEquipSet set){

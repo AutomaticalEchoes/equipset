@@ -1,7 +1,8 @@
 package automaticalechoes.equipset.equipset.forge.Events;
 
 
-import com.AutomaticalEchoes.equipset.EquipSet;
+
+import automaticalechoes.equipset.equipset.EquipSet;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

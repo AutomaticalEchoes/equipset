@@ -1,6 +1,6 @@
 package automaticalechoes.equipset.equipset.client.gui;
 
-import com.AutomaticalEchoes.equipset.client.screen.EquipmentSettingsScreen;
+import automaticalechoes.equipset.equipset.client.screen.EquipmentSettingsScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

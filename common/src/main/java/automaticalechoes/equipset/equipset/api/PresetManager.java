@@ -1,6 +1,6 @@
 package automaticalechoes.equipset.equipset.api;
 
-import com.AutomaticalEchoes.equipset.config.ConfigValue;
+import automaticalechoes.equipset.equipset.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -89,7 +89,7 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
     }
 
     private static void readTag(CompoundTag compoundTag, PresetManager presetManager) {
-        for(int i = 0; i < ConfigValue.NUMS; i++){
+        for(int i = 0; i < Config.NUMS(); i++){
             String value = String.valueOf(i);
             if(compoundTag.contains(value)){
                 CompoundTag compound = compoundTag.getCompound(value);
@@ -121,7 +121,7 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
 
     public static PresetManager defaultManager(){
         PresetManager presetManager = new PresetManager();
-        for (int i = 0; i < ConfigValue.NUMS; i++) {
+        for (int i = 0; i < Config.NUMS(); i++) {
             presetManager.neoSet();
         }
        return presetManager;

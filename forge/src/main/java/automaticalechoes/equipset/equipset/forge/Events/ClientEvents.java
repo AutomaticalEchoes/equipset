@@ -1,6 +1,5 @@
 package automaticalechoes.equipset.equipset.forge.Events;
 
-import com.AutomaticalEchoes.equipset.client.keyMapping.KeyMappings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;

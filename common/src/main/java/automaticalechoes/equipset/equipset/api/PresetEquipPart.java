@@ -1,12 +1,11 @@
 package automaticalechoes.equipset.equipset.api;
 
-import com.AutomaticalEchoes.equipset.config.ConfigValue;
+import automaticalechoes.equipset.equipset.config.Config;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import org.apache.commons.lang3.tuple.Pair;
@@ -46,7 +45,7 @@ public class PresetEquipPart {
     }
 
     public boolean isCurse(ServerPlayer serverPlayer){
-        return ConfigValue.CURSE_CHECK && EnchantmentHelper.getEnchantments(equipmentSlot.getItem(serverPlayer)).containsKey(Enchantments.BINDING_CURSE);
+        return Config.CurseCheck() && EnchantmentHelper.getEnchantments(equipmentSlot.getItem(serverPlayer)).containsKey(Enchantments.BINDING_CURSE);
     }
 
     public boolean isCurse(ServerPlayer serverPlayer, MutableComponent component){

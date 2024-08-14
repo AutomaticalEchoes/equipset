@@ -6,6 +6,7 @@ import automaticalechoes.equipset.equipset.api.PresetEquipSet;
 import automaticalechoes.equipset.equipset.api.PresetManager;
 import automaticalechoes.equipset.equipset.api.Utils;
 import automaticalechoes.equipset.equipset.client.screen.EquipmentSettingsScreen;
+import automaticalechoes.equipset.equipset.common.network.EquipSetNetWork;
 import automaticalechoes.equipset.equipset.common.network.FeedBack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -26,12 +27,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Arrays;
 import java.util.OptionalInt;
+import java.util.function.Consumer;
 
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity implements IPlayerInterface {
     @Shadow public abstract void animateHurt(float p_265280_);
 
+    @Shadow private int sleepCounter;
     @Unique
     private final PresetManager equipSet$equipmentSets = PresetManager.defaultManager();
     @Unique
@@ -62,11 +65,11 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
         p_36265_.put("EquipmentSettings", equipSet$equipmentSets.toTag());
     }
 
-    public PresetManager getEquipmentSets() {
+    public PresetManager equipSet$getEquipmentSets() {
         return this.level().isClientSide() ? this.entityData.get(equipSet$SETS) : this.equipSet$equipmentSets;
     }
 
-    public void useSet(int num, boolean lockCheck) {
+    public void equipSet$useSet(int num, boolean lockCheck) {
         if(level().isClientSide) return;
         ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
         Component feedBack = Utils.NoneSet;
@@ -82,11 +85,12 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             feedBack = equipSet$equipmentSets.UseSet(serverPlayer, this.equipSet$focus, canUse);
             this.equipSet$focus = canUse;
         }catch (Exception e){ }
-        CommonModEvents.NetWork.sendTo(new FeedBack(feedBack), serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+        Component finalFeedBack = feedBack;
+        EquipSet.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, finalFeedBack));
     }
 
     public void equipSet$nextSet(){
-        useSet((equipSet$focus + 1) % equipSet$equipmentSets.size(), true);
+        equipSet$useSet((equipSet$focus + 1) % equipSet$equipmentSets.size(), true);
     }
 
     @Override
@@ -96,8 +100,7 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             if(this.equipSet$equipmentSets.get(num).setPartStatus(partName, enable)) equipSet$onSetUpdate();
         }catch (NullPointerException e){
             ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
-            serverPlayer.connection.
-            CommonModEvents.NetWork.sendTo(new FeedBack(Utils.NoneSet), serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+            EquipSet.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
         }
 
     }
@@ -109,7 +112,7 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             equipSet$onSetUpdate();
         }catch (NullPointerException e){
             ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
-            CommonModEvents.NetWork.sendTo(new FeedBack(Utils.NoneSet), serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+            EquipSet.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
         }
 
     }
@@ -151,14 +154,14 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             if(shouldUpdate) equipSet$onSetUpdate();
         }catch (NullPointerException e){
             ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
-            CommonModEvents.NetWork.sendTo(new FeedBack(Utils.NoneSet), serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+            EquipSet.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
         }
 
 
     }
 
     public void equipSet$restoreFrom(ServerPlayer serverPlayer){
-        ((IPlayerInterface)this).getEquipmentSets().copyFrom(((IPlayerInterface) serverPlayer).getEquipmentSets());
+        ((IPlayerInterface)this).equipSet$getEquipmentSets().copyFrom(((IPlayerInterface) serverPlayer).equipSet$getEquipmentSets());
         equipSet$onSetUpdate();
     }
 

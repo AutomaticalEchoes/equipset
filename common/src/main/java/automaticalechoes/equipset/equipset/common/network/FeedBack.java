@@ -6,32 +6,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
 
-public record FeedBack(Component component) implements Packet<EquipSetPacketListener> {
-    public static void encode(FeedBack msg, FriendlyByteBuf packetBuffer) {
+public interface FeedBack {
 
+    Component component();
+    default void handleMessage(FeedBack msg, ServerPlayer sender) {
+        Minecraft.getInstance().gui.setOverlayMessage(this.component(),false);
     }
 
-    public static FeedBack decode(FriendlyByteBuf packetBuffer) {
-        return new FeedBack(packetBuffer.readComponent());
-    }
 
-    static void onMessage(FeedBack msg, Supplier<NetworkEvent.Context> contextSupplier) {
-        NetworkEvent.Context context = contextSupplier.get();
-        context.enqueueWork(() -> msg.handleMessage(msg, context.getSender()));
-        context.setPacketHandled(true);
-    }
-
-    public void handleMessage(FeedBack msg, ServerPlayer sender) {
-        Minecraft.getInstance().gui.setOverlayMessage(msg.component,false);
-    }
-
-    @Override
-    public void write(FriendlyByteBuf friendlyByteBuf) {
-        friendlyByteBuf.writeComponent(msg.component);
-    }
-
-    @Override
-    public void handle(EquipSetPacketListener packetListener) {
-
-    }
 }

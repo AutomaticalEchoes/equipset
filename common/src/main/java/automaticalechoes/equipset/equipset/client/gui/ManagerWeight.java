@@ -27,7 +27,6 @@ public class ManagerWeight extends AbstractWidget {
     private int scroll = 0;
     private int maxScroll = 0;
 
-
     public ManagerWeight(int p_240025_, int p_240026_, int p_240027_, int p_240028_, Component p_240029_) {
         super(p_240025_, p_240026_, p_240027_, p_240028_, p_240029_);
         this.font = Minecraft.getInstance().font;

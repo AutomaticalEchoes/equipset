@@ -5,10 +5,7 @@ import automaticalechoes.equipset.equipset.EquipSet;
 import automaticalechoes.equipset.equipset.api.IPlayerInterface;
 import automaticalechoes.equipset.equipset.api.PresetEquipSet;
 import automaticalechoes.equipset.equipset.api.Utils;
-import com.AutomaticalEchoes.equipset.client.keyMapping.Actions;
-import com.AutomaticalEchoes.equipset.common.CommonModEvents;
-import com.AutomaticalEchoes.equipset.common.network.UpdatePreset;
-import com.AutomaticalEchoes.equipset.common.network.UpdateSetName;
+import automaticalechoes.equipset.equipset.client.keyMapping.Actions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -61,7 +58,7 @@ public class SettingWeight extends AbstractWidget {
         IButton save = new IButton(lineX_1,  lineY_2 - 18,  10,  18,COMPONENT_SAVE, this::onPress);
         IButton change = new IButton(lineX_1,  lineY_1 + 1, 10, 10, Component.literal(String.valueOf(id)), p_93751_ -> Actions.SendUsePreset(id));
         NameEdit = new IEditBox(font, this.getX() + 17,  lineY_1 + 2, 64, 8, Component.empty(), name -> {
-            CommonModEvents.NetWork.sendToServer(new UpdateSetName(id, name));
+            EquipSet.NETWORK.ifPresent( net -> net.SendUpdateSetName(id, name));
         } );
         NameEdit.setValue(Set(id).getName());
 
@@ -122,7 +119,7 @@ public class SettingWeight extends AbstractWidget {
 
     private void onPress(Button button){
         // clear, save, lock, unLock
-        int cases = -1;
+        int cases;
         if(button.getMessage().equals(COMPONENT_CLEAR)){
             cases = 0;
         }else if(button.getMessage().equals(COMPONENT_SAVE)){
@@ -133,12 +130,14 @@ public class SettingWeight extends AbstractWidget {
             cases = 3;
         }else if(button.getMessage().equals(COMPONENT_DELETE)){
             cases = 5;
+        } else {
+            cases = -1;
         }
 
-        if(cases != -1) CommonModEvents.NetWork.sendToServer(new UpdatePreset(id, cases));
+        if(cases != -1)  EquipSet.NETWORK.ifPresent( net -> net.SendUpdatePreset(id, cases));
     }
 
     private static PresetEquipSet Set(int id){
-        return ((IPlayerInterface)Minecraft.getInstance().player).getEquipmentSets().get(id);
+        return ((IPlayerInterface)Minecraft.getInstance().player).equipSet$getEquipmentSets().get(id);
     }
 }

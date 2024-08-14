@@ -1,4 +1,4 @@
-package automaticalechoes.equipset.equipset.config;
+package automaticalechoes.equipset.equipset.forge.Config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 

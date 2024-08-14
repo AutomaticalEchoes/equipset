@@ -36,7 +36,7 @@ public class EquipmentSettingsScreen extends EffectRenderingInventoryScreen<Inve
     }
 
     public void reInit(){
-        managerWeight.update(font, iPlayerInterface.getEquipmentSets());
+        managerWeight.update(font, iPlayerInterface.equipSet$getEquipmentSets());
     }
 
     @Override
