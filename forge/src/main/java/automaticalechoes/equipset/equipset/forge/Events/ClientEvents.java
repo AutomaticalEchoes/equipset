@@ -1,5 +1,6 @@
 package automaticalechoes.equipset.equipset.forge.Events;
 
+import automaticalechoes.equipset.equipset.client.keyMapping.ModKeyMappings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
@@ -18,7 +19,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.Key event) {
-        if(inputDelay <= 0 && KeyMappings.OnClick())
+        if(inputDelay <= 0 && ModKeyMappings.OnClick())
             inputDelay = 10;
     }
 

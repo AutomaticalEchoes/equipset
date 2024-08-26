@@ -89,7 +89,7 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
     }
 
     private static void readTag(CompoundTag compoundTag, PresetManager presetManager) {
-        for(int i = 0; i < Config.NUMS(); i++){
+        for(int i = 0; i < Config.Server.NUMS(); i++){
             String value = String.valueOf(i);
             if(compoundTag.contains(value)){
                 CompoundTag compound = compoundTag.getCompound(value);

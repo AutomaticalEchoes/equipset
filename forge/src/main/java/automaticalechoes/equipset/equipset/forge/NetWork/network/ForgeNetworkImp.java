@@ -8,6 +8,11 @@ import net.minecraftforge.network.NetworkDirection;
 
 public class ForgeNetworkImp implements EquipSetNetWork {
     @Override
+    public void AskConfig() {
+        CommonModEvents.NetWork.sendToServer(new ForgeAskConfig());
+    }
+
+    @Override
     public void SendFeedBack(ServerPlayer serverPlayer, Component component) {
         CommonModEvents.NetWork.sendTo(new ForgeFeedBack(component), serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }

@@ -33,8 +33,6 @@ import java.util.function.Consumer;
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity implements IPlayerInterface {
     @Shadow public abstract void animateHurt(float p_265280_);
-
-    @Shadow private int sleepCounter;
     @Unique
     private final PresetManager equipSet$equipmentSets = PresetManager.defaultManager();
     @Unique

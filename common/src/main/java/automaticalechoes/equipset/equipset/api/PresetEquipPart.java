@@ -17,8 +17,6 @@ public class PresetEquipPart {
     static final String ITEM = "item";
     static final String LOG = "log";
     static final String ENABLE = "enable";
-
-
     private final SlotGetter equipmentSlot;
     private ItemStack settingNeed;
     private final LocationLog locationRecord;
@@ -45,7 +43,7 @@ public class PresetEquipPart {
     }
 
     public boolean isCurse(ServerPlayer serverPlayer){
-        return Config.CurseCheck() && EnchantmentHelper.getEnchantments(equipmentSlot.getItem(serverPlayer)).containsKey(Enchantments.BINDING_CURSE);
+        return Config.Server.CurseCheck() && EnchantmentHelper.getEnchantments(equipmentSlot.getItem(serverPlayer)).containsKey(Enchantments.BINDING_CURSE);
     }
 
     public boolean isCurse(ServerPlayer serverPlayer, MutableComponent component){

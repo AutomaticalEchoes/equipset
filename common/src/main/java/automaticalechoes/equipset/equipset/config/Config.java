@@ -34,9 +34,9 @@ public class Config {
         static final String EQUIP$CURSE_CHECK = "equip_curse_check";
         static final String EQUIP$NUMS = "equip_set_nums";
         @Environment(EnvType.SERVER)
-        protected static ConfigValue<Boolean> CURSE_CHECK = new ConfigValue<>(EQUIP$CURSE_CHECK, new Data<>(false), Server::getCurse);
+        protected static ConfigValue<Boolean> CURSE_CHECK = new ConfigValue<>(EQUIP$CURSE_CHECK, new Data<>(false));
         @Environment(EnvType.SERVER)
-        protected static ConfigValue<Integer> NUMS = new ConfigValue<>(EQUIP$CURSE_CHECK, new Data<>(4), Server::getNums);
+        protected static ConfigValue<Integer> NUMS = new ConfigValue<>(EQUIP$NUMS, new Data<>(4));
         public static int NUMS() {
             return NUMS.data().getData();
         }
@@ -51,9 +51,9 @@ public class Config {
         static final String EQUIP$KEY_R = "equip_set_keymapping_r";
         static final String EQUIP$KEY_NUMS = "equip_set_keymapping_nums";
         @Environment(EnvType.CLIENT)
-        protected static ConfigValue<Boolean> KEYMAPPING_R = new ConfigValue<>(EQUIP$KEY_R, new Data<>(true), );
+        protected static ConfigValue<Boolean> KEYMAPPING_R = new ConfigValue<>(EQUIP$KEY_R, new Data<>(true));
         @Environment(EnvType.CLIENT)
-        protected static ConfigValue<Boolean> KEYMAPPING_NUMS = new ConfigValue<>(EQUIP$KEY_NUMS, new Data<>(true),);
+        protected static ConfigValue<Boolean> KEYMAPPING_NUMS = new ConfigValue<>(EQUIP$KEY_NUMS, new Data<>(true));
 
         public static boolean KeymappingNums() {
             return KEYMAPPING_NUMS.data().getData();

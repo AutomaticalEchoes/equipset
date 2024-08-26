@@ -6,6 +6,8 @@ import automaticalechoes.equipset.equipset.common.Serializer.SetsSerializer;
 import automaticalechoes.equipset.equipset.common.network.EquipSetNetWork;
 import automaticalechoes.equipset.equipset.config.Config;
 import com.mojang.logging.LogUtils;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import org.slf4j.Logger;
@@ -19,6 +21,8 @@ public class EquipSet
 	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final SetsSerializer SETS_SERIALIZER = new SetsSerializer();
 	public static Optional<EquipSetNetWork> NETWORK = Optional.empty();
+
+	public static Config EQUIP_SET_CONFIG = new Config();
 	public static void init() {
 		ContainerType.init();
 		PresetEquipSet.init();
@@ -27,4 +31,15 @@ public class EquipSet
 //		Minecraft.getInstance().options.keyMappings = ArrayUtils.addAll(Minecraft.getInstance().options.keyMappings, ModKeyMappings.KEY_MAPPING.keySet().toArray(new KeyMapping[0]));
 //		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EquipSetConfig.SPEC,"equipset-config.toml");
 	}
+
+	@Environment(EnvType.CLIENT)
+	public static class Client{
+		public static int SERVER_SET_NUMS = 4;
+	}
+
+	@Environment(EnvType.SERVER)
+	public static class Server{
+
+	}
+
 }
