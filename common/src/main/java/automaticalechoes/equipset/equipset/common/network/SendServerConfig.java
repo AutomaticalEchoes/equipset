@@ -7,6 +7,6 @@ public interface SendServerConfig {
 
     int setsNum();
     default void handleMessage(SendServerConfig msg, ServerPlayer sender) {
-        EquipSet.Client.SERVER_SET_NUMS = msg.setsNum();
+        EquipSet.Client.InitServerConfig(setsNum());
     }
 }

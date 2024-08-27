@@ -29,13 +29,11 @@ public class Config {
 
     }
 
-    @Environment(EnvType.SERVER)
+//    @Environment(EnvType.SERVER)
     public static class Server extends Config {
         static final String EQUIP$CURSE_CHECK = "equip_curse_check";
         static final String EQUIP$NUMS = "equip_set_nums";
-        @Environment(EnvType.SERVER)
         protected static ConfigValue<Boolean> CURSE_CHECK = new ConfigValue<>(EQUIP$CURSE_CHECK, new Data<>(false));
-        @Environment(EnvType.SERVER)
         protected static ConfigValue<Integer> NUMS = new ConfigValue<>(EQUIP$NUMS, new Data<>(4));
         public static int NUMS() {
             return NUMS.data().getData();

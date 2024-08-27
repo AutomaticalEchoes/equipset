@@ -20,6 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 @Environment(EnvType.CLIENT)
 public class SettingWeight extends AbstractWidget {
@@ -78,7 +79,7 @@ public class SettingWeight extends AbstractWidget {
     @Override
     public void render(GuiGraphics p_282421_, int p_93658_, int p_93659_, float p_93660_) {
         if(!this.visible) return;
-        try {
+//        try {
             this.preSet = Set(id);
             Utils.Render4c(p_282421_, BLACK_GROUND, getX(), getY(), width, height, 140, 40);
             if (!NameEdit.isFocused()) NameEdit.setValue(preSet.getName());
@@ -90,18 +91,20 @@ public class SettingWeight extends AbstractWidget {
                 UnLock.render(p_282421_, p_93658_, p_93659_, p_93660_);
                 p_282421_.pose().popPose();
             }
-        }catch (Exception e){ }
+//        }catch (Exception e){
+//            EquipSet.LOGGER.info(e.getMessage());
+//        }
     }
 
     @Override
     public void renderWidget(GuiGraphics p_282421_, int p_268034_, int p_268009_, float p_268085_) {
         active = !preSet.isLock();
-        children.forEach(child -> {
-            if(child instanceof ItemButton itemButton) itemButton.info(preSet);
+        for (AbstractWidget child : children) {
+            if (child instanceof ItemButton itemButton) itemButton.info(preSet);
             child.render(p_282421_, p_268034_, p_268009_, p_268085_);
-            if(child != NameEdit)
+            if (child != NameEdit)
                 child.setFocused(active && child.isMouseOver(p_268034_, p_268009_));
-        });
+        }
     }
 
     @Override

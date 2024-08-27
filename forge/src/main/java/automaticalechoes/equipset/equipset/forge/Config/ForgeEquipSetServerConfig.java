@@ -1,8 +1,9 @@
 package automaticalechoes.equipset.equipset.forge.Config;
 
+import automaticalechoes.equipset.equipset.config.Config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class ForgeEquipSetServerConfig {
+public class ForgeEquipSetServerConfig extends Config.Server{
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
@@ -15,6 +16,11 @@ public class ForgeEquipSetServerConfig {
         PRESET_NUM = BUILDER.defineInRange("preset_nums", 4, 2, 10);
         BUILDER.pop();
         SPEC = BUILDER.build();
+    }
+
+    public static void OnLoad(){
+        Server.NUMS.set(PRESET_NUM.get());
+        Server.CURSE_CHECK.set(CURSE_CHECK.get());
     }
 
 }

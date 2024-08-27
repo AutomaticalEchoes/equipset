@@ -1,11 +1,13 @@
 package automaticalechoes.equipset.equipset.client.keyMapping;
 
 import automaticalechoes.equipset.equipset.EquipSet;
+import automaticalechoes.equipset.equipset.api.EquipSetOptions;
 import automaticalechoes.equipset.equipset.config.Config;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +22,7 @@ public class ModKeyMappings {
 
 
     public static void Init(){
-        if(ISINIT) return;
+//        if(ISINIT) return;
         if(Config.Client.KeymappingR()){
             RegisterKeyMapping(new KeyMapping("key.category.equipset.setchange",
                     InputConstants.KEY_R,
@@ -28,7 +30,6 @@ public class ModKeyMappings {
         }
         if(Config.Client.KeymappingNums()){
             EquipSet.NETWORK.ifPresent(network -> {
-                network.AskConfig();
                 int nums = EquipSet.Client.SERVER_SET_NUMS;
                 for (int i = 0; i < nums; i++) {
                     int finalI = i;
@@ -39,6 +40,7 @@ public class ModKeyMappings {
             });
 
         }
+        ((EquipSetOptions) Minecraft.getInstance().options).equipset$loadKeyMappings();
         ISINIT = true;
     }
 
@@ -51,6 +53,7 @@ public class ModKeyMappings {
         for (Map.Entry<KeyMapping, Runnable> entry : KEY_MAPPING.entrySet()) {
             if(entry.getKey().isDown()){
                 entry.getValue().run();
+                EquipSet.LOGGER.info("onclick");
                 return true;
             }
         }

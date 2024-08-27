@@ -78,7 +78,7 @@ public class IButton extends Button {
         boolean hoveredOrFocused = this.isHoveredOrFocused();
         if(Common == null){
             int k = !this.active ? 0 : ( hoveredOrFocused ? 2 : 1);
-            guiGraphics.blitNineSliced(WIDGETS_LOCATION, this.getX(), this.getY(), 0, 46 + k * 20, this.width, this.height, 200, 20, 2, 3, 2, 2);
+            Utils.blitWithBorder(guiGraphics, WIDGETS_LOCATION, this.getX(), this.getY(), 0, 46 + k * 20, this.width, this.height, 200, 20, 2, 3, 2, 2);
         }else{
             Pair<ResourceLocation, Integer> pair = Hover != null && hoveredOrFocused ? Hover : Common;
             Utils.Render4c(guiGraphics, pair.getA(), getX(), getY(), width, height, pair.getB() >> 10, pair.getB() & 2047);
