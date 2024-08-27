@@ -121,7 +121,7 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
 
     public static PresetManager defaultManager(){
         PresetManager presetManager = new PresetManager();
-        for (int i = 0; i < Config.NUMS(); i++) {
+        for (int i = 0; i < Config.Server.NUMS(); i++) {
             presetManager.neoSet();
         }
        return presetManager;

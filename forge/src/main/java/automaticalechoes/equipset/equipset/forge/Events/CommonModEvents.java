@@ -2,7 +2,8 @@ package automaticalechoes.equipset.equipset.forge.Events;
 
 import automaticalechoes.equipset.equipset.EquipSet;
 import automaticalechoes.equipset.equipset.client.keyMapping.ModKeyMappings;
-import automaticalechoes.equipset.equipset.config.Config;
+import automaticalechoes.equipset.equipset.forge.Config.ForgeEquipSetClientConfig;
+import automaticalechoes.equipset.equipset.forge.Config.ForgeEquipSetServerConfig;
 import automaticalechoes.equipset.equipset.forge.NetWork.network.ForgeNetworkImp;
 import automaticalechoes.equipset.equipset.forge.NetWork.network.PacketHandler;
 import net.minecraft.client.KeyMapping;
@@ -28,7 +29,10 @@ public class CommonModEvents {
             NetWork = PacketHandler.RegisterPacket();
             ForgeNetworkImp forgeNetworkImp = new ForgeNetworkImp();
             EquipSet.NETWORK = Optional.of(forgeNetworkImp);
+
         });
+
+        ModKeyMappings.Init();
 
     }
 
@@ -42,7 +46,9 @@ public class CommonModEvents {
         if(event.getConfig().getModId() == null) return;
         if(event.getConfig().getModId() != EquipSet.MODID) return;
         if(event.getConfig().getType() == ModConfig.Type.CLIENT){
-            Config.Client.KeymappingNums().
+            ForgeEquipSetClientConfig.OnLoad();
+        }else if(event.getConfig().getType() == ModConfig.Type.SERVER){
+            ForgeEquipSetServerConfig.OnLoad();
         }
 
     }

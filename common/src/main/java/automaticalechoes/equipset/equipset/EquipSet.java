@@ -2,6 +2,7 @@ package automaticalechoes.equipset.equipset;
 
 import automaticalechoes.equipset.equipset.api.ContainerType;
 import automaticalechoes.equipset.equipset.api.PresetEquipSet;
+import automaticalechoes.equipset.equipset.client.keyMapping.ModKeyMappings;
 import automaticalechoes.equipset.equipset.common.Serializer.SetsSerializer;
 import automaticalechoes.equipset.equipset.common.network.EquipSetNetWork;
 import automaticalechoes.equipset.equipset.config.Config;
@@ -26,6 +27,7 @@ public class EquipSet
 	public static void init() {
 		ContainerType.init();
 		PresetEquipSet.init();
+
 		EntityDataSerializers.registerSerializer(SETS_SERIALIZER);
 		Config.Init(Minecraft.getInstance().gameDirectory);
 //		Minecraft.getInstance().options.keyMappings = ArrayUtils.addAll(Minecraft.getInstance().options.keyMappings, ModKeyMappings.KEY_MAPPING.keySet().toArray(new KeyMapping[0]));
