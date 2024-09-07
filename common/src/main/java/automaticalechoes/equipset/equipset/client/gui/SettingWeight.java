@@ -57,7 +57,7 @@ public class SettingWeight extends AbstractWidget {
         lineX_2 = x + width - 4;
         IButton lock = new IButton(lineX_2 - 20,  lineY_1 + 1, 20, 10, COMPONENT_LOCK, this::onPress);
         IButton save = new IButton(lineX_1,  lineY_2 - 18,  10,  18,COMPONENT_SAVE, this::onPress);
-        IButton change = new IButton(lineX_1,  lineY_1 + 1, 10, 10, Component.literal(String.valueOf(id)), p_93751_ -> Actions.SendUsePreset(id));
+        IButton change = new IButton(lineX_1,  lineY_1 + 1, 10, 10, Component.literal(String.valueOf(id + 1)), p_93751_ -> Actions.SendUsePreset(id));
         NameEdit = new IEditBox(font, this.getX() + 17,  lineY_1 + 2, 64, 8, Component.empty(), name -> {
             EquipSet.NETWORK.ifPresent( net -> net.SendUpdateSetName(id, name));
         } );

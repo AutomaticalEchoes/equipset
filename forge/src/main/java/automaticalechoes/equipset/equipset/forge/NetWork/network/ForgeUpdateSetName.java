@@ -20,7 +20,7 @@ public record ForgeUpdateSetName(int suitNum, String suitName) implements Update
     }
     static void onMessage(ForgeUpdateSetName msg, Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context context = contextSupplier.get();
-        context.enqueueWork(() -> msg.handleMessage(msg,context.getSender()));
+        context.enqueueWork(() -> msg.handleMessage(context.getSender()));
         context.setPacketHandled(true);
     }
 

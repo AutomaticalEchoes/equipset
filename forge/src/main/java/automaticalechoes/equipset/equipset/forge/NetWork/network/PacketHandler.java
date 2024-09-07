@@ -37,11 +37,11 @@ public class PacketHandler {
                 .decoder(ForgeUpdateSetName::decode)
                 .consumerMainThread(ForgeUpdateSetName::onMessage)
                 .add();
-        INSTANCE.messageBuilder(ForgeAskConfig.class,6)
-                .encoder(ForgeAskConfig::encode)
-                .decoder(ForgeAskConfig::decode)
-                .consumerMainThread(ForgeAskConfig::onMessage)
-                .add();
+//        INSTANCE.messageBuilder(ForgeAskConfig.class,6)
+//                .encoder(ForgeAskConfig::encode)
+//                .decoder(ForgeAskConfig::decode)
+//                .consumerMainThread(ForgeAskConfig::onMessage)
+//                .add();
         INSTANCE.messageBuilder(ForgeSendServerConfig.class,7)
                 .encoder(ForgeSendServerConfig::encode)
                 .decoder(ForgeSendServerConfig::decode)

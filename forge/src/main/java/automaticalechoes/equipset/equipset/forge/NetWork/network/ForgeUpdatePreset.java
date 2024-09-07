@@ -22,7 +22,7 @@ public record ForgeUpdatePreset(int targetNum, int cases)implements UpdatePreset
 
     static void onMessage(ForgeUpdatePreset msg, Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context context = contextSupplier.get();
-        context.enqueueWork(() -> msg.handleMessage(msg, context.getSender()));
+        context.enqueueWork(() -> msg.handleMessage(context.getSender()));
         context.setPacketHandled(true);
     }
 

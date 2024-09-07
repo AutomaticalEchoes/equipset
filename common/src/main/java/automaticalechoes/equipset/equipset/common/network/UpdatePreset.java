@@ -9,7 +9,7 @@ public interface UpdatePreset {
     int targetNum();
     int cases();
 
-    default void handleMessage(UpdatePreset msg,ServerPlayer sender) {
+    default void handleMessage(ServerPlayer sender) {
         IPlayerInterface player = (IPlayerInterface) sender;
         player.equipSet$updateSet(targetNum(),cases());
     }

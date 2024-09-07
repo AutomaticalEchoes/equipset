@@ -53,7 +53,7 @@ public class ModKeyMappings {
         for (Map.Entry<KeyMapping, Runnable> entry : KEY_MAPPING.entrySet()) {
             if(entry.getKey().isDown()){
                 entry.getValue().run();
-                EquipSet.LOGGER.info("onclick");
+//                EquipSet.LOGGER.info("onclick");
                 return true;
             }
         }

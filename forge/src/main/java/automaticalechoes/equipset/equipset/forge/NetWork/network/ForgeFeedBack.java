@@ -18,7 +18,7 @@ public record ForgeFeedBack(Component component) implements FeedBack {
 
     static void onMessage(ForgeFeedBack msg, Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context context = contextSupplier.get();
-        context.enqueueWork(() -> msg.handleMessage(msg, context.getSender()));
+        context.enqueueWork(msg::handleMessage);
         context.setPacketHandled(true);
     }
 }

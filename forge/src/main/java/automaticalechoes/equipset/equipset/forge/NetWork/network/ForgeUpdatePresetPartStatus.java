@@ -20,7 +20,7 @@ public record ForgeUpdatePresetPartStatus(int targetNum, String partName, boolea
 
     static void onMessage(UpdatePresetPartStatus msg, Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context context = contextSupplier.get();
-        context.enqueueWork(() -> msg.handleMessage(msg, context.getSender()));
+        context.enqueueWork(() -> msg.handleMessage(context.getSender()));
         context.setPacketHandled(true);
     }
 

@@ -20,7 +20,7 @@ public class EquipSet
 {
 	public static final String MODID = "equipset";
 	// Directly reference a slf4j logger
-	public static final Logger LOGGER = LogUtils.getLogger();
+//	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final SetsSerializer SETS_SERIALIZER = new SetsSerializer();
 	public static Optional<EquipSetNetWork> NETWORK = Optional.empty();
 

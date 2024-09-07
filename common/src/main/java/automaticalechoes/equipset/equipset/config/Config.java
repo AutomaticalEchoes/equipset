@@ -19,9 +19,7 @@ import java.util.Optional;
 public class Config {
 
     static final ArrayList<ConfigValue<?>> VALUES = new ArrayList<>();
-    static final Splitter OPTION_SPLITTER = Splitter.on(':').limit(2);
     static File optionsFile = null;
-    static CompoundTag configTag = new CompoundTag();
 
 
     public static void Init(File GameDist) {

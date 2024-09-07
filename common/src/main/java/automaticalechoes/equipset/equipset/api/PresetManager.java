@@ -103,7 +103,7 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
     }
 
     public void neoSet(){
-        put(neoId(), new PresetEquipSet("Preset " + size()));
+        put(neoId(), new PresetEquipSet("Preset " + (size() + 1)));
     }
 
     public Integer neoId(){

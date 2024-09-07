@@ -8,7 +8,7 @@ public interface UpdateSetName {
     int suitNum();
     String suitName();
 
-    default void handleMessage(UpdateSetName msg, ServerPlayer sender) {
-        ((IPlayerInterface)sender).equipSet$updateSetName(msg.suitNum(),msg.suitName());
+    default void handleMessage(ServerPlayer sender) {
+        ((IPlayerInterface)sender).equipSet$updateSetName(suitNum(), suitName());
     }
 }

@@ -17,7 +17,7 @@ public record ForgeSendServerConfig(int setsNum) implements SendServerConfig {
 
     public static void onMessage(ForgeSendServerConfig msg, Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context context = contextSupplier.get();
-        context.enqueueWork(() -> msg.handleMessage(msg, context.getSender()));
+        context.enqueueWork(msg::handleMessage);
         context.setPacketHandled(true);
     }
 

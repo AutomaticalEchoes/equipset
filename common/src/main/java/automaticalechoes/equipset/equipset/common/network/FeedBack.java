@@ -9,7 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 public interface FeedBack {
 
     Component component();
-    default void handleMessage(FeedBack msg, ServerPlayer sender) {
+    default void handleMessage() {
         Minecraft.getInstance().gui.setOverlayMessage(this.component(),false);
     }
 

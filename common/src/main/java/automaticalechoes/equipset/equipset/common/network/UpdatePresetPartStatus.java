@@ -9,8 +9,8 @@ public interface UpdatePresetPartStatus{
     String partName();
     boolean enable();
 
-    default void handleMessage(UpdatePresetPartStatus msg, ServerPlayer sender) {
+    default void handleMessage(ServerPlayer sender) {
         IPlayerInterface player = (IPlayerInterface) sender;
-        player.equipSet$updatePartStatus(msg.targetNum(), msg.partName(), msg.enable());
+        player.equipSet$updatePartStatus(targetNum(), partName(), enable());
     }
 }
