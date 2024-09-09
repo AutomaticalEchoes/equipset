@@ -2,6 +2,7 @@ package automaticalechoes.equipset.equipset.fabric.NetWork.network;
 
 import automaticalechoes.equipset.equipset.common.network.EquipSetNetWork;
 import automaticalechoes.equipset.equipset.config.Config;
+import automaticalechoes.equipset.equipset.config.ModGameRule;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.chat.Component;
@@ -16,7 +17,8 @@ public class FabricNetworkImp implements EquipSetNetWork {
 
     @Override
     public void SendServerConfig(ServerPlayer serverPlayer) {
-        ServerPlayNetworking.send(serverPlayer, new FabricSendServerConfig(Config.Server.NUMS()));
+        int nums = serverPlayer.server.getWorldData().getGameRules().getRule(ModGameRule.EQUIP$NUMS).get();
+        ServerPlayNetworking.send(serverPlayer, new FabricSendServerConfig(nums));
     }
 
     @Override

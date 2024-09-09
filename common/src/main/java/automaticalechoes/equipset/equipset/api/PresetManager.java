@@ -1,10 +1,12 @@
 package automaticalechoes.equipset.equipset.api;
 
 import automaticalechoes.equipset.equipset.config.Config;
+import automaticalechoes.equipset.equipset.config.ModGameRule;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.LinkedHashMap;
@@ -13,6 +15,7 @@ import java.util.Map;
 public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
 
     static final String ID = "id";
+    static final String SIZE = "size";
     private MutableComponent feedBack;
     private PresetManager(){
 
@@ -23,6 +26,12 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
 
     public int[] unLockedSets() {
         return entrySet().stream().filter(entry -> !entry.getValue().isLock()).mapToInt(Map.Entry::getKey).toArray();
+    }
+
+    public void resize(int nums){
+        if(size() == nums) return;
+        while (size() > nums) popSet();
+        while (size() < nums) neoSet();
     }
 
     public Component UseSet(ServerPlayer serverPlayer, int old, int neo){
@@ -74,22 +83,24 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
             compoundtag.put(String.valueOf(i),set);
             i++;
         }
+        compoundtag.putInt(SIZE, size());
         return compoundtag;
     }
 
     public static PresetManager FromTag(CompoundTag compoundTag) {
         PresetManager presetManager = new PresetManager();
-        readTag(compoundTag, presetManager);
+        presetManager.fromTag(compoundTag);
         return presetManager;
     }
 
     public void fromTag(CompoundTag compoundTag) {
         this.clear();
-        readTag(compoundTag, this);
+        int nums = compoundTag.getInt(SIZE);
+        readTag(compoundTag, this, nums);
     }
 
-    private static void readTag(CompoundTag compoundTag, PresetManager presetManager) {
-        for(int i = 0; i < Config.Server.NUMS(); i++){
+    private static void readTag(CompoundTag compoundTag, PresetManager presetManager, int nums) {
+        for(int i = 0; i < nums; i++){
             String value = String.valueOf(i);
             if(compoundTag.contains(value)){
                 CompoundTag compound = compoundTag.getCompound(value);
@@ -104,6 +115,10 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
 
     public void neoSet(){
         put(neoId(), new PresetEquipSet("Preset " + (size() + 1)));
+    }
+
+    public void popSet(){
+        remove(size() - 1);
     }
 
     public Integer neoId(){
@@ -121,7 +136,7 @@ public class PresetManager extends LinkedHashMap<Integer, PresetEquipSet> {
 
     public static PresetManager defaultManager(){
         PresetManager presetManager = new PresetManager();
-        for (int i = 0; i < Config.Server.NUMS(); i++) {
+        for (int i = 0; i < 4; i++) {
             presetManager.neoSet();
         }
        return presetManager;

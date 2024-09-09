@@ -11,4 +11,7 @@ public interface EquipSetOptions {
 
     @Unique
     void equipset$loadKeyMappings();
+
+    @Unique
+    void equipset$removeKeyMappings();
 }

@@ -11,4 +11,5 @@ public interface IPlayerInterface {
     void equipSet$updateSetName(int num, String s);
     void equipSet$updatePartStatus(int num, String partName, boolean enable);
     void equipSet$restoreFrom(ServerPlayer serverPlayer);
+    void equipSet$resize(int nums);
 }

@@ -1,23 +1,15 @@
 package automaticalechoes.equipset.equipset.forge.Events;
 
 import automaticalechoes.equipset.equipset.EquipSet;
-import automaticalechoes.equipset.equipset.api.EquipSetOptions;
-import automaticalechoes.equipset.equipset.client.keyMapping.ModKeyMappings;
 import automaticalechoes.equipset.equipset.forge.Config.ForgeEquipSetClientConfig;
-import automaticalechoes.equipset.equipset.forge.Config.ForgeEquipSetServerConfig;
 import automaticalechoes.equipset.equipset.forge.NetWork.network.ForgeNetworkImp;
 import automaticalechoes.equipset.equipset.forge.NetWork.network.PacketHandler;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Optional;
 
@@ -45,8 +37,6 @@ public class CommonModEvents {
         if(!event.getConfig().getModId().equals(EquipSet.MODID)) return;
         if(event.getConfig().getType() == ModConfig.Type.CLIENT){
             ForgeEquipSetClientConfig.OnLoad();
-        }else if(event.getConfig().getType() == ModConfig.Type.COMMON){
-            ForgeEquipSetServerConfig.OnLoad();
         }
 
     }

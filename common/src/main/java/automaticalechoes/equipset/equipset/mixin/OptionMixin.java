@@ -19,8 +19,13 @@ public class OptionMixin implements EquipSetOptions {
     @Unique
     public void equipset$loadKeyMappings() {
         KeyMapping[] modKeyMappings = ModKeyMappings.KEY_MAPPING.keySet().toArray(new KeyMapping[0]);
-        if(equipset$KeyMappingInit) keyMappings = ArrayUtils.removeElements(keyMappings, modKeyMappings);
         keyMappings = ArrayUtils.addAll(Minecraft.getInstance().options.keyMappings, modKeyMappings);
         equipset$KeyMappingInit = true;
+    }
+
+    @Override
+    public void equipset$removeKeyMappings() {
+        KeyMapping[] modKeyMappings = ModKeyMappings.KEY_MAPPING.keySet().toArray(new KeyMapping[0]);
+        if(equipset$KeyMappingInit) keyMappings = ArrayUtils.removeElements(keyMappings, modKeyMappings);
     }
 }

@@ -6,6 +6,7 @@ import automaticalechoes.equipset.equipset.client.keyMapping.ModKeyMappings;
 import automaticalechoes.equipset.equipset.common.Serializer.SetsSerializer;
 import automaticalechoes.equipset.equipset.common.network.EquipSetNetWork;
 import automaticalechoes.equipset.equipset.config.Config;
+import automaticalechoes.equipset.equipset.config.ModGameRule;
 import com.mojang.logging.LogUtils;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
 import net.fabricmc.api.EnvType;
@@ -28,9 +29,8 @@ public class EquipSet
 	public static void init() {
 		ContainerType.init();
 		PresetEquipSet.init();
-
+		ModGameRule.init();
 		EntityDataSerializers.registerSerializer(SETS_SERIALIZER);
-		Config.Init(Minecraft.getInstance().gameDirectory);
 //		Minecraft.getInstance().options.keyMappings = ArrayUtils.addAll(Minecraft.getInstance().options.keyMappings, ModKeyMappings.KEY_MAPPING.keySet().toArray(new KeyMapping[0]));
 //		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EquipSetConfig.SPEC,"equipset-config.toml");
 	}

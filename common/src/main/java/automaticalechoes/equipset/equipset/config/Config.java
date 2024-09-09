@@ -18,30 +18,6 @@ import java.util.Optional;
 
 public class Config {
 
-    static final ArrayList<ConfigValue<?>> VALUES = new ArrayList<>();
-    static File optionsFile = null;
-
-
-    public static void Init(File GameDist) {
-        optionsFile = new File(GameDist, "\\config\\equipset-config.txt");
-
-    }
-
-//    @Environment(EnvType.SERVER)
-    public static class Server extends Config {
-        static final String EQUIP$CURSE_CHECK = "equip_curse_check";
-        static final String EQUIP$NUMS = "equip_set_nums";
-        protected static ConfigValue<Boolean> CURSE_CHECK = new ConfigValue<>(EQUIP$CURSE_CHECK, new Data<>(false));
-        protected static ConfigValue<Integer> NUMS = new ConfigValue<>(EQUIP$NUMS, new Data<>(4));
-        public static int NUMS() {
-            return NUMS.data().getData();
-        }
-        public static boolean CurseCheck() {
-            return CURSE_CHECK.data().getData();
-        }
-
-    }
-
     @Environment(EnvType.CLIENT)
     public static class Client extends Config {
         static final String EQUIP$KEY_R = "equip_set_keymapping_r";

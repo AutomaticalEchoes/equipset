@@ -2,6 +2,7 @@ package automaticalechoes.equipset.equipset.forge.NetWork.network;
 
 import automaticalechoes.equipset.equipset.common.network.EquipSetNetWork;
 import automaticalechoes.equipset.equipset.config.Config;
+import automaticalechoes.equipset.equipset.config.ModGameRule;
 import automaticalechoes.equipset.equipset.forge.Events.CommonModEvents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,7 +17,8 @@ public class ForgeNetworkImp implements EquipSetNetWork {
 
     @Override
     public void SendServerConfig(ServerPlayer serverPlayer) {
-        CommonModEvents.NetWork.sendTo(new ForgeSendServerConfig(Config.Server.NUMS()), serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+        int nums = serverPlayer.server.getWorldData().getGameRules().getRule(ModGameRule.EQUIP$NUMS).get();
+        CommonModEvents.NetWork.sendTo(new ForgeSendServerConfig(nums), serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override

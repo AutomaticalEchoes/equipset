@@ -1,7 +1,6 @@
 package automaticalechoes.equipset.equipset.forge;
 
 import automaticalechoes.equipset.equipset.forge.Config.ForgeEquipSetClientConfig;
-import automaticalechoes.equipset.equipset.forge.Config.ForgeEquipSetServerConfig;
 import dev.architectury.platform.forge.EventBuses;
 import automaticalechoes.equipset.equipset.EquipSet;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -16,6 +15,5 @@ public class EquipSetForge {
         EventBuses.registerModEventBus(EquipSet.MODID, FMLJavaModLoadingContext.get().getModEventBus());
         EquipSet.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ForgeEquipSetClientConfig.SPEC,"equipset-client-config.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ForgeEquipSetServerConfig.SPEC,"equipset-server-config.toml");
     }
 }

@@ -1,6 +1,7 @@
 package automaticalechoes.equipset.equipset.api;
 
 import automaticalechoes.equipset.equipset.config.Config;
+import automaticalechoes.equipset.equipset.config.ModGameRule;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,7 +44,7 @@ public class PresetEquipPart {
     }
 
     public boolean isCurse(ServerPlayer serverPlayer){
-        return Config.Server.CurseCheck() && EnchantmentHelper.getEnchantments(equipmentSlot.getItem(serverPlayer)).containsKey(Enchantments.BINDING_CURSE);
+        return serverPlayer.server.getWorldData().getGameRules().getRule(ModGameRule.EQUIP$CURSE_CHECK).get() && EnchantmentHelper.getEnchantments(equipmentSlot.getItem(serverPlayer)).containsKey(Enchantments.BINDING_CURSE);
     }
 
     public boolean isCurse(ServerPlayer serverPlayer, MutableComponent component){

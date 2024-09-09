@@ -8,6 +8,7 @@ import automaticalechoes.equipset.equipset.api.Utils;
 import automaticalechoes.equipset.equipset.client.screen.EquipmentSettingsScreen;
 import automaticalechoes.equipset.equipset.common.network.EquipSetNetWork;
 import automaticalechoes.equipset.equipset.common.network.FeedBack;
+import automaticalechoes.equipset.equipset.config.ModGameRule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -53,6 +54,7 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
         if(compoundTag.contains("EquipmentSettings")){
             CompoundTag suitTag = compoundTag.getCompound("EquipmentSettings");
             equipSet$equipmentSets.fromTag(suitTag);
+            if(getServer() != null) equipSet$equipmentSets.resize(getServer().getWorldData().getGameRules().getInt(ModGameRule.EQUIP$NUMS));
         }
         equipSet$onSetUpdate();
         equipSet$focus = compoundTag.getInt("Focus");
@@ -89,6 +91,12 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
 
     public void equipSet$nextSet(){
         equipSet$useSet((equipSet$focus + 1) % equipSet$equipmentSets.size(), true);
+    }
+
+    @Override
+    public void equipSet$resize(int nums) {
+        equipSet$equipmentSets.resize(nums);
+        equipSet$onSetUpdate();
     }
 
     @Override
