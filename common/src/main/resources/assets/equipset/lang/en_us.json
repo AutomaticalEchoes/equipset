@@ -23,5 +23,8 @@
   "button.equipset.save": "",
   "button.equipset.lock": "LOCK",
 
-  "label.equipset.manager": "Preset Manager"
+  "label.equipset.manager": "Preset Manager",
+
+  "gamerule.equip_curse_check": "Check binding curse",
+  "gamerule.equip_set_nums": "Preset nums"
 }

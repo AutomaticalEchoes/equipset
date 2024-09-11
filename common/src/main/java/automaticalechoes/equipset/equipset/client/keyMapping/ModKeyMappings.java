@@ -27,12 +27,12 @@ public class ModKeyMappings {
         CALL_SET_INVENTORY_KEY = RegisterKeyMapping(new KeyMapping("key.category.equipset.setinvetory",
                 InputConstants.KEY_B,
                 MOD_CATEGORY), Actions::CallScreen);
-        if(Config.Client.KeymappingR()){
+        if(Config.KeymappingR()){
             RegisterKeyMapping(new KeyMapping("key.category.equipset.setchange",
                     InputConstants.KEY_R,
                     MOD_CATEGORY),() -> Actions.SendUsePreset(-1));
         }
-        if(Config.Client.KeymappingNums()){
+        if(Config.KeymappingNums()){
             int nums = EquipSet.Client.SERVER_SET_NUMS;
                 for (int i = 0; i < nums; i++) {
                     int finalI = i;

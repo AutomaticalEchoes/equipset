@@ -2,11 +2,17 @@ package automaticalechoes.equipset.equipset.mixin;
 
 import automaticalechoes.equipset.equipset.api.EquipSetOptions;
 import automaticalechoes.equipset.equipset.client.keyMapping.ModKeyMappings;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
 import org.apache.commons.lang3.ArrayUtils;
 import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Options.class)
 public class OptionMixin implements EquipSetOptions {

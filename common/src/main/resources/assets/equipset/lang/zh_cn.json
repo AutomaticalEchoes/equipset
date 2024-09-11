@@ -23,5 +23,7 @@
   "button.equipset.save": "",
   "button.equipset.lock": "LOCK",
 
-  "label.equipset.manager": "预设管理"
+  "label.equipset.manager": "预设管理",
+  "gamerule.equip_curse_check": "禁止切换绑定诅咒装备",
+  "gamerule.equip_set_nums": "预设套装数量"
 }

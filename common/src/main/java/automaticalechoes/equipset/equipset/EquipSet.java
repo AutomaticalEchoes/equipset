@@ -21,11 +21,9 @@ public class EquipSet
 {
 	public static final String MODID = "equipset";
 	// Directly reference a slf4j logger
-//	public static final Logger LOGGER = LogUtils.getLogger();
+	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final SetsSerializer SETS_SERIALIZER = new SetsSerializer();
 	public static Optional<EquipSetNetWork> NETWORK = Optional.empty();
-
-	public static Config EQUIP_SET_CONFIG = new Config();
 	public static void init() {
 		ContainerType.init();
 		PresetEquipSet.init();
@@ -39,14 +37,10 @@ public class EquipSet
 	public static class Client{
 		public static int SERVER_SET_NUMS = 4;
 		public static void InitServerConfig(int nums){
+			Config.load();
 			SERVER_SET_NUMS = nums;
 			ModKeyMappings.Init();
 		}
-	}
-
-	@Environment(EnvType.SERVER)
-	public static class Server{
-
 	}
 
 }
