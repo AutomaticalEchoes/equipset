@@ -5,7 +5,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.players.PlayerList;
-import org.automaticalechoes.equipset.EquipSet;
+import org.automaticalechoes.equipset.Constants;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,6 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PlayerListMixin {
     @Inject(method = "placeNewPlayer", at = {@At("RETURN")})
     private void placeNewPlayer(Connection pConnection, ServerPlayer pPlayer, CommonListenerCookie pCookie, CallbackInfo ci) {
-        EquipSet.NETWORK.ifPresent(network -> {network.SendServerConfig(pPlayer);});
+        Constants.NETWORK.ifPresent(network -> {network.SendServerConfig(pPlayer);});
     }
 }

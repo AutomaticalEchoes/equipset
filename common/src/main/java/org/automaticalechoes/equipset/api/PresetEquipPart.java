@@ -116,7 +116,7 @@ public class PresetEquipPart {
     public CompoundTag toTag(Player player){
         CompoundTag tag = new CompoundTag();
         tag.put(EQUIP, equipmentSlot.toTag());
-        tag.put(ITEM, settingNeed.save(player.registryAccess()));
+        if(settingNeed != null && !settingNeed.isEmpty()) tag.put(ITEM, settingNeed.save(player.registryAccess()));
         tag.put(LOG, locationRecord.toTag());
         tag.putBoolean(ENABLE, enable);
         return tag;

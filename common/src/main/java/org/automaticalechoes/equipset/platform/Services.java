@@ -1,6 +1,5 @@
 package org.automaticalechoes.equipset.platform;
 
-import org.automaticalechoes.equipset.Constants;
 import org.automaticalechoes.equipset.platform.services.IPlatformHelper;
 
 import java.util.ServiceLoader;

@@ -9,15 +9,13 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.automaticalechoes.equipset.api.IPlayerInterface;
 import org.automaticalechoes.equipset.client.gui.IEditBox;
 import org.automaticalechoes.equipset.client.gui.ManagerWeight;
 import org.automaticalechoes.equipset.client.keyMapping.ModKeyMappings;
 import org.jetbrains.annotations.Nullable;
 
-@OnlyIn(Dist.CLIENT)
+
 public class EquipmentSettingsScreen extends EffectRenderingInventoryScreen<InventoryMenu> {
     protected final IPlayerInterface iPlayerInterface;
     protected ManagerWeight managerWeight;
@@ -56,7 +54,7 @@ public class EquipmentSettingsScreen extends EffectRenderingInventoryScreen<Inve
         int i = this.leftPos;
         int j = this.topPos;
         p_281500_.blit(INVENTORY_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
-        InventoryScreen.renderEntityInInventoryFollowsMouse(p_281500_, i + 51, j + 75,i + 100, j + 145, 30, 0.0625F, (float)(i + 51) - p_283481_, (float)(j + 75 - 50) - p_281831_, this.minecraft.player);
+        InventoryScreen.renderEntityInInventoryFollowsMouse(p_281500_, i + 51, j + 70,i + 100, j , 30, 0.0625F, (float)(i + 51) - p_283481_, (float)(j + 75 - 50) - p_281831_, this.minecraft.player);
     }
 
     @Override

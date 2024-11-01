@@ -11,7 +11,7 @@ public class Equipset {
         // project.
 
         // Use Forge to bootstrap the Common mod.
-        EventBuses.registerModEventBus(EquipSet.MODID, FMLJavaModLoadingContext.get().getModEventBus());
+        EventBuses.registerModEventBus(Constants.MODID, FMLJavaModLoadingContext.get().getModEventBus());
 
     }
 }

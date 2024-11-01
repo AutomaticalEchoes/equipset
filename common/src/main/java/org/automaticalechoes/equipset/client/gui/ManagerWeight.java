@@ -1,11 +1,7 @@
 package org.automaticalechoes.equipset.client.gui;
 
 
-import cpw.mods.modlauncher.Environment;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.automaticalechoes.equipset.Constants;
-import org.automaticalechoes.equipset.EquipSet;
 import org.automaticalechoes.equipset.api.PresetEquipSet;
 import org.automaticalechoes.equipset.api.PresetManager;
 import org.automaticalechoes.equipset.api.Utils;
@@ -22,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@OnlyIn(Dist.CLIENT)
+
 public class ManagerWeight extends AbstractWidget {
     public static final ResourceLocation BLACK_GROUND = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/manager.png");
     public static final Component TITLE = Component.translatable("label.equipset.manager");

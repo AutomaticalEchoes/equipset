@@ -14,15 +14,13 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import org.automaticalechoes.equipset.EquipSet;
+import org.automaticalechoes.equipset.Constants;
 import org.automaticalechoes.equipset.api.PresetEquipPart;
 import org.automaticalechoes.equipset.api.PresetEquipSet;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-@OnlyIn(Dist.CLIENT)
+
 public class ItemButton extends Button {
     public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.withDefaultNamespace("textures/gui/container/bundle.png");
     private final Font font = Minecraft.getInstance().font;
@@ -76,7 +74,7 @@ public class ItemButton extends Button {
     @Override
     public void onPress() {
         if(part != null)
-            EquipSet.NETWORK.ifPresent(net -> net.SendUpdatePresetPartStatus(num, PartName, !part.isEnable()));
+            Constants.NETWORK.ifPresent(net -> net.SendUpdatePresetPartStatus(num, PartName, !part.isEnable()));
     }
 
     public void info(PresetEquipSet set){

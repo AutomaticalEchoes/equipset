@@ -11,10 +11,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.automaticalechoes.equipset.Constants;
-import org.automaticalechoes.equipset.EquipSet;
 import org.automaticalechoes.equipset.api.IPlayerInterface;
 import org.automaticalechoes.equipset.api.PresetEquipSet;
 import org.automaticalechoes.equipset.api.Utils;
@@ -22,9 +19,8 @@ import org.automaticalechoes.equipset.client.keyMapping.Actions;
 
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
-@OnlyIn(Dist.CLIENT)
+
 public class SettingWeight extends AbstractWidget {
     protected static final Component COMPONENT_CLEAR = Component.translatable("button.equipset.clear");
     protected static final Component COMPONENT_SAVE = Component.translatable("button.equipset.save");
@@ -61,7 +57,7 @@ public class SettingWeight extends AbstractWidget {
         IButton save = new IButton(lineX_1,  lineY_2 - 18,  10,  18,COMPONENT_SAVE, this::onPress);
         IButton change = new IButton(lineX_1,  lineY_1 + 1, 10, 10, Component.literal(String.valueOf(id + 1)), p_93751_ -> Actions.SendUsePreset(id));
         NameEdit = new IEditBox(font, this.getX() + 17,  lineY_1 + 2, 64, 8, Component.empty(), name -> {
-            EquipSet.NETWORK.ifPresent(net -> net.SendUpdateSetName(id, name));
+            Constants.NETWORK.ifPresent(net -> net.SendUpdateSetName(id, name));
         } );
         NameEdit.setValue(Set(id).getName());
 
@@ -129,7 +125,7 @@ public class SettingWeight extends AbstractWidget {
             cases = -1;
         }
 
-        if(cases != -1)  EquipSet.NETWORK.ifPresent( net -> net.SendUpdatePreset(id, cases));
+        if(cases != -1)  Constants.NETWORK.ifPresent(net -> net.SendUpdatePreset(id, cases));
     }
 
     private static PresetEquipSet Set(int id){

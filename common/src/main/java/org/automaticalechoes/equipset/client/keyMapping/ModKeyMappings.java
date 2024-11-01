@@ -5,15 +5,13 @@ import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import org.automaticalechoes.equipset.EquipSet;
+import org.automaticalechoes.equipset.Constants;
 import org.automaticalechoes.equipset.api.EquipSetOptions;
 import org.automaticalechoes.equipset.config.Config;
 
 import java.util.HashMap;
 import java.util.Map;
-@OnlyIn(Dist.CLIENT)
+
 public class ModKeyMappings {
     public static final String MOD_CATEGORY = "key.equipset";
     public static final HashMap<KeyMapping,Runnable> KEY_MAPPING = new HashMap<>();
@@ -35,7 +33,7 @@ public class ModKeyMappings {
                     MOD_CATEGORY),() -> Actions.SendUsePreset(-1));
         }
         if(Config.KeymappingNums()){
-            int nums = EquipSet.Client.SERVER_SET_NUMS;
+            int nums = Constants.Client.SERVER_SET_NUMS;
                 for (int i = 0; i < nums; i++) {
                     int finalI = i;
                     RegisterKeyMapping(new KeyMapping("key.category.equipset.setchange.select_%d".formatted(i),

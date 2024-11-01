@@ -7,16 +7,12 @@ import com.google.common.io.Files;
 
 import net.minecraft.client.*;
 import net.minecraft.nbt.CompoundTag;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.automaticalechoes.equipset.Constants;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.function.Function;
 
-@OnlyIn(Dist.CLIENT)
 public class Config {
     private static final Splitter OPTION_SPLITTER = Splitter.on(':').limit(2);
     private static final String CONFIG_FILE = "config\\equipset_client_config.txt";

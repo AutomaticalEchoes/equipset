@@ -1,6 +1,5 @@
 package org.automaticalechoes.equipset.mixin;
 
-import org.automaticalechoes.equipset.Constants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;

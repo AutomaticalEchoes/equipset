@@ -4,11 +4,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketEncoder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.world.item.ItemStack;
 
 public record FeedBack(Component component) implements CustomPacketPayload  {
-    public static final StreamCodec<RegistryFriendlyByteBuf, FeedBack> CODEC = StreamCodec.composite(Component.C)
+    public static final StreamCodec<RegistryFriendlyByteBuf, FeedBack> CODEC = StreamCodec.composite(ComponentSerialization.TRUSTED_STREAM_CODEC, FeedBack::component, FeedBack::new);
     public void handleMessage() {
         Minecraft.getInstance().gui.setOverlayMessage(this.component(),false);
     }

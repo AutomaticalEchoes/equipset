@@ -5,12 +5,10 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.automaticalechoes.equipset.client.screen.EquipmentSettingsScreen;
 
 import java.util.function.Consumer;
-@OnlyIn(Dist.CLIENT)
+
 public class IEditBox extends EditBox {
     private final Consumer<String> runnable;
     public IEditBox(Font p_94106_, int p_94107_, int p_94108_, int p_94109_, int p_94110_, Component p_94112_, Consumer<String> runnable) {

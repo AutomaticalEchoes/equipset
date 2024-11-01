@@ -1,14 +1,13 @@
 package org.automaticalechoes.equipset.NetWork.network;
 
 
-import automaticalechoes.equipset.equipset.EquipSet;
-import automaticalechoes.equipset.equipset.forge.Events.CommonModEvents;
+i
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.network.SimpleChannel;
 
 public class PacketHandler {
-    private static final ResourceLocation CHANNEL_NAME=new ResourceLocation(EquipSet.MODID,"network");
+    private static final ResourceLocation CHANNEL_NAME = new ResourceLocation(EquipSet.MODID,"network");
     private static final String PROTOCOL_VERSION = new ResourceLocation(EquipSet.MODID,"1").toString();
     public static SimpleChannel RegisterPacket(){
         final SimpleChannel INSTANCE = NetworkRegistry.ChannelBuilder.named(CHANNEL_NAME)

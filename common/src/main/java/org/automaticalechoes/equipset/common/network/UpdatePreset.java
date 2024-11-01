@@ -2,11 +2,15 @@ package org.automaticalechoes.equipset.common.network;
 
 
 
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import org.automaticalechoes.equipset.api.IPlayerInterface;
 
 public record UpdatePreset(int targetNum, int cases) implements CustomPacketPayload {
+    public static final StreamCodec<RegistryFriendlyByteBuf, UpdatePreset> CODEC = StreamCodec.composite(ByteBufCodecs.INT,UpdatePreset::targetNum,ByteBufCodecs.INT,UpdatePreset::cases,UpdatePreset::new);
     // clear, save, lock, unLock, neo
     public void handleMessage(ServerPlayer sender) {
         IPlayerInterface player = (IPlayerInterface) sender;

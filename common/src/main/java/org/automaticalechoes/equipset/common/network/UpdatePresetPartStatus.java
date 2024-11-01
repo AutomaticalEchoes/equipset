@@ -2,11 +2,19 @@ package org.automaticalechoes.equipset.common.network;
 
 
 
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import org.automaticalechoes.equipset.api.IPlayerInterface;
 
 public record UpdatePresetPartStatus(int targetNum, String partName, boolean enable)  implements CustomPacketPayload {
+    public static final StreamCodec<RegistryFriendlyByteBuf, UpdatePresetPartStatus> CODEC =
+            StreamCodec.composite(ByteBufCodecs.INT,UpdatePresetPartStatus::targetNum,
+                    ByteBufCodecs.STRING_UTF8,UpdatePresetPartStatus::partName,
+                    ByteBufCodecs.BOOL,UpdatePresetPartStatus::enable,
+                    UpdatePresetPartStatus::new);
     public void handleMessage(ServerPlayer sender) {
         IPlayerInterface player = (IPlayerInterface) sender;
         player.equipSet$updatePartStatus(targetNum(), partName(), enable());

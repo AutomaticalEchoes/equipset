@@ -8,13 +8,10 @@ import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import org.automaticalechoes.equipset.api.Utils;
 import org.jetbrains.annotations.Nullable;
 import oshi.util.tuples.Pair;
 
-@OnlyIn(Dist.CLIENT)
+
 public class IButton extends Button {
     private @Nullable Pair<ResourceLocation, Integer> Common;
     private @Nullable Pair<ResourceLocation, Integer> Hover;

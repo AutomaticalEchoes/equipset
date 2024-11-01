@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,7 +12,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import org.automaticalechoes.equipset.EquipSet;
+import org.automaticalechoes.equipset.Constants;
 import org.automaticalechoes.equipset.api.IPlayerInterface;
 import org.automaticalechoes.equipset.api.PresetEquipSet;
 import org.automaticalechoes.equipset.api.PresetManager;
@@ -29,7 +28,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Arrays;
 import java.util.OptionalInt;
-import java.util.function.Consumer;
 
 
 @Mixin(Player.class)
@@ -40,17 +38,14 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
     @Unique
     private int equipSet$focus;
     @Unique
-    private static final EntityDataAccessor<CompoundTag> equipSet$SETS = SynchedEntityData.defineId(Player.class , EntityDataSerializers.COMPOUND_TAG );
+    private static final EntityDataAccessor<CompoundTag> equipSet$SETS = SynchedEntityData.defineId(Player.class, EntityDataSerializers.COMPOUND_TAG );
     protected PlayerMixin(EntityType<? extends LivingEntity> p_20966_, Level p_20967_) {
         super(p_20966_, p_20967_);
     }
 
-
-
     @Inject(method = {"defineSynchedData"},at = {@At("RETURN")})
     protected void defineSynchedData(SynchedEntityData.Builder pBuilder, CallbackInfo ci) {
-        super.defineSynchedData(pBuilder);
-        pBuilder.define(equipSet$SETS, equipSet$equipmentSets.toTag());
+        pBuilder.define(equipSet$SETS, PresetManager.defaultManager((Player)(Object)this).toTag());
     }
 
     @Inject(method = {"readAdditionalSaveData"},at = {@At("RETURN")})
@@ -90,7 +85,7 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             this.equipSet$focus = canUse;
         }catch (Exception e){ }
         Component finalFeedBack = feedBack;
-        EquipSet.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, finalFeedBack));
+        Constants.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, finalFeedBack));
     }
 
     public void equipSet$nextSet(){
@@ -110,9 +105,8 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             if(this.equipSet$equipmentSets.get(num).setPartStatus(partName, enable)) equipSet$onSetUpdate();
         }catch (NullPointerException e){
             ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
-            EquipSet.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
+            Constants.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
         }
-
     }
 
     public void equipSet$updateSetName(int num, String s){
@@ -122,9 +116,8 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             equipSet$onSetUpdate();
         }catch (NullPointerException e){
             ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
-            EquipSet.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
+            Constants.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
         }
-
     }
 
     public void equipSet$updateSet(int num, int cases){
@@ -164,7 +157,7 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
             if(shouldUpdate) equipSet$onSetUpdate();
         }catch (NullPointerException e){
             ServerPlayer serverPlayer = (ServerPlayer) (Object) this;
-            EquipSet.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
+            Constants.NETWORK.ifPresent(equipSetNetWork -> equipSetNetWork.SendFeedBack(serverPlayer, Utils.NoneSet));
         }
 
 

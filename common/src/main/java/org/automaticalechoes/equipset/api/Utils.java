@@ -6,8 +6,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 
 public class Utils {
@@ -74,7 +72,7 @@ public class Utils {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+
     public static void Render4c(GuiGraphics graphics, ResourceLocation resourceLocation, int x, int y, int w, int h, int rw, int rh){
         graphics.blit(resourceLocation, x, y, 0, 0, w/2, h/2, rw, rh);
         graphics.blit(resourceLocation, x + w/2, y, rw - w/2, 0, w/2, h/2, rw, rh);
