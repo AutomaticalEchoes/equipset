@@ -1,0 +1,33 @@
+package org.automaticalechoes.equipset.common.command;
+
+
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import org.automaticalechoes.equipset.api.IPlayerInterface;
+
+public class UsePresetCommand {
+    public static final LiteralArgumentBuilder<CommandSourceStack> EQUIPMENT_PRESET = Commands.literal("eqs");
+    public static final LiteralArgumentBuilder<CommandSourceStack> USE_PRESET = Commands.literal("use_preset");
+    public static final RequiredArgumentBuilder<CommandSourceStack, Integer> ID = Commands.argument("id", IntegerArgumentType.integer(-1, 9));
+
+    public static void register(CommandDispatcher<CommandSourceStack> p_250343_) {
+        p_250343_.register(EQUIPMENT_PRESET.then(USE_PRESET.executes(context -> UsePreset(context.getSource(), -1))
+                                                           .then(ID.executes(context -> UsePreset(context.getSource(), IntegerArgumentType.getInteger(context, "id"))))));
+    }
+
+    public static int UsePreset(CommandSourceStack sourceStack , int id){
+        IPlayerInterface player = (IPlayerInterface) sourceStack.getPlayer();
+        if (player == null) return 0;
+        if(id == -1){
+            player.equipSet$nextSet();
+        }else {
+            player.equipSet$useSet(id, false);
+        }
+
+        return 1;
+    }
+}
