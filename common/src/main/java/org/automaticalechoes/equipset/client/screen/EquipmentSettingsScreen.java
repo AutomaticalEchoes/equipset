@@ -54,7 +54,7 @@ public class EquipmentSettingsScreen extends EffectRenderingInventoryScreen<Inve
         int i = this.leftPos;
         int j = this.topPos;
         p_281500_.blit(INVENTORY_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
-        InventoryScreen.renderEntityInInventoryFollowsMouse(p_281500_, i + 51, j + 70,i + 100, j , 30, 0.0625F, (float)(i + 51) - p_283481_, (float)(j + 75 - 50) - p_281831_, this.minecraft.player);
+        InventoryScreen.renderEntityInInventoryFollowsMouse(p_281500_, i + 26, j + 8,i + 75, j + 78, 30, 0.0625F,  p_283481_,  p_281831_, this.minecraft.player);
     }
 
     @Override

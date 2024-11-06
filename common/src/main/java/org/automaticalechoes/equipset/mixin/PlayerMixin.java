@@ -176,7 +176,7 @@ public abstract class PlayerMixin extends LivingEntity implements IPlayerInterfa
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> p_21104_) {
         super.onSyncedDataUpdated(p_21104_);
-        if(!level().isClientSide ) return;
+        if(!level().isClientSide) return;
         if(p_21104_.equals(equipSet$SETS)) {
             this.equipSet$equipmentSets.fromTag(entityData.get(equipSet$SETS));
             if(Minecraft.getInstance().screen instanceof EquipmentSettingsScreen screen)screen.reInit();

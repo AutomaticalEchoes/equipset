@@ -4,10 +4,12 @@ package org.automaticalechoes.equipset.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.ResourceLocation;
+import org.automaticalechoes.equipset.api.Utils;
 import org.jetbrains.annotations.Nullable;
 import oshi.util.tuples.Pair;
 
@@ -15,6 +17,7 @@ import oshi.util.tuples.Pair;
 public class IButton extends Button {
     private @Nullable Pair<ResourceLocation, Integer> Common;
     private @Nullable Pair<ResourceLocation, Integer> Hover;
+    private static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.withDefaultNamespace("widget/button"), ResourceLocation.withDefaultNamespace("widget/button_disabled"), ResourceLocation.withDefaultNamespace("widget/button_highlighted"));
     private boolean omit = false;
     private int textColor = -1;
     private int textHoverColor = -1;
@@ -66,22 +69,22 @@ public class IButton extends Button {
         return this;
     }
 
-//    public void renderWidget(GuiGraphics p_282701_, int p_282638_, int p_283565_, float p_282549_) {
-//        renderBg(p_282701_, p_282638_, p_283565_, p_282549_);
-//        if(showText) drawString(p_282701_, p_282638_, p_283565_, p_282549_, textColor != textHoverColor && this.isHoveredOrFocused()?  textHoverColor : textColor);
-//    }
-//
-//
-//    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-//        boolean hoveredOrFocused = this.isHoveredOrFocused();
-//        if(Common == null){
-//            int k = !this.active ? 0 : ( hoveredOrFocused ? 2 : 1);
+
+    public void renderWidget(GuiGraphics p_282701_, int p_282638_, int p_283565_, float p_282549_) {
+        renderBg(p_282701_, p_282638_, p_283565_, p_282549_);
+        if(showText) drawString(p_282701_, p_282638_, p_283565_, p_282549_, textColor != textHoverColor && this.isHoveredOrFocused()?  textHoverColor : textColor);
+    }
+
+    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        boolean hoveredOrFocused = this.isHoveredOrFocused();
+        if(Common == null){
+            guiGraphics.blitSprite(SPRITES.get(this.active, this.isHoveredOrFocused()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
 //            Utils.blitWithBorder(guiGraphics, WIDGETS_LOCATION, this.getX(), this.getY(), 0, 46 + k * 20, this.width, this.height, 200, 20, 2, 3, 2, 2);
-//        }else{
-//            Pair<ResourceLocation, Integer> pair = Hover != null && hoveredOrFocused ? Hover : Common;
-//            Utils.Render4c(guiGraphics, pair.getA(), getX(), getY(), width, height, pair.getB() >> 10, pair.getB() & 2047);
-//        }
-//    }
+        }else{
+            Pair<ResourceLocation, Integer> pair = Hover != null && hoveredOrFocused ? Hover : Common;
+            Utils.Render4c(guiGraphics, pair.getA(), getX(), getY(), width, height, pair.getB() >> 10, pair.getB() & 2047);
+        }
+    }
 
     public void drawString(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, int color) {
         Minecraft mc = Minecraft.getInstance();

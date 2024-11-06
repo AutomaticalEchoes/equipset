@@ -22,7 +22,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class ItemButton extends Button {
-    public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.withDefaultNamespace("textures/gui/container/bundle.png");
+    public static final ResourceLocation SLOT = ResourceLocation.withDefaultNamespace("textures/gui/sprites/container/bundle/slot.png");
+    public static final ResourceLocation BLOCKED_SLOT = ResourceLocation.withDefaultNamespace("textures/gui/sprites/container/bundle/blocked_slot.png");
     private final Font font = Minecraft.getInstance().font;
     private final int num;
     private PresetEquipPart part;
@@ -44,9 +45,8 @@ public class ItemButton extends Button {
         if(part == null) return;
         boolean enable = part.isEnable();
         boolean isEmpty = part.getSettingNeed().isEmpty();
-        p_281670_.blit(TEXTURE_LOCATION, getX() - 1, getY() - 1, 0, enable? 0 : 40,18, 20, 128, 128);
-
-
+        ResourceLocation TEXTURE_LOCATION = enable? SLOT : BLOCKED_SLOT;
+        p_281670_.blit(TEXTURE_LOCATION, getX() - 1, getY() - 1, 0,0,18, 20, 18, 20);
         if(enable && !isEmpty){
             p_281670_.renderItem(part.getSettingNeed(), getX(), getY());
         }
