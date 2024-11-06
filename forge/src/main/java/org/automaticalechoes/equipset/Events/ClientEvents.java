@@ -1,21 +1,16 @@
 package org.automaticalechoes.equipset.Events;
 
-import automaticalechoes.equipset.equipset.client.keyMapping.ModKeyMappings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.automaticalechoes.equipset.client.keyMapping.ModKeyMappings;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
     public static int inputDelay = 0;
-
-    @SubscribeEvent
-    public static void onClientSetup(final FMLClientSetupEvent event){
-
-    }
 
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.Key event) {

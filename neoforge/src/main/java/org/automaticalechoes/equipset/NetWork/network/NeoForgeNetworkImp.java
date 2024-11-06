@@ -1,43 +1,43 @@
 package org.automaticalechoes.equipset.NetWork.network;
 
 
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.SimpleChannel;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.automaticalechoes.equipset.common.network.*;
 import org.automaticalechoes.equipset.config.ModGameRule;
 
-public class ForgeNetworkImp implements EquipSetNetWork {
-    public static final SimpleChannel channel = PacketHandler.RegisterPacket();
-//    public ForgeNetworkImp() {
-//
+public class NeoForgeNetworkImp implements EquipSetNetWork {
+//    @Override
+//    public void AskConfig() {
+//        CommonModEvents.NetWork.sendToServer(new ForgeAskConfig());
 //    }
+
 
     @Override
     public void SendServerConfig(ServerPlayer serverPlayer) {
         int nums = serverPlayer.server.getWorldData().getGameRules().getRule(ModGameRule.EQUIP$NUMS).get();
-        channel.send(new SendServerConfig(nums), serverPlayer.connection.getConnection());
+        PacketDistributor.sendToPlayer(serverPlayer, new SendServerConfig(nums));
     }
 
     @Override
     public void SendFeedBack(ServerPlayer serverPlayer, Component component) {
-        channel.send(new FeedBack(component), serverPlayer.connection.getConnection());
+        PacketDistributor.sendToPlayer(serverPlayer, new FeedBack(component));
     }
 
     @Override
     public void SendUpdatePreset(int targetNum, int cases) {
-        channel.send(new UpdatePreset(targetNum,cases),PacketDistributor.SERVER.noArg());
+        PacketDistributor.sendToServer(new UpdatePreset(targetNum, cases));
     }
 
     @Override
     public void SendUpdatePresetPartStatus(int targetNum, String partName, boolean enable) {
-        channel.send(new UpdatePresetPartStatus(targetNum,partName,enable), PacketDistributor.SERVER.noArg());
+        PacketDistributor.sendToServer(new UpdatePresetPartStatus(targetNum, partName, enable));
     }
 
     @Override
     public void SendUpdateSetName(int suitNum, String suitName) {
-        channel.send(new UpdateSetName(suitNum, suitName), PacketDistributor.SERVER.noArg());
+        PacketDistributor.sendToServer(new UpdateSetName(suitNum, suitName));
     }
 }

@@ -1,9 +1,10 @@
 package org.automaticalechoes.equipset.Events;
 
-import automaticalechoes.equipset.equipset.common.command.UsePresetCommand;
+
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.automaticalechoes.equipset.common.command.UsePresetCommand;
 
 @Mod.EventBusSubscriber
 public class CommonEvents {

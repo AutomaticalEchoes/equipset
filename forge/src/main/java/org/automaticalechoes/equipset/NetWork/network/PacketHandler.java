@@ -1,50 +1,45 @@
 package org.automaticalechoes.equipset.NetWork.network;
 
 
-i
+import io.netty.util.AttributeKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.Channel;
+import net.minecraftforge.network.ChannelBuilder;
 import net.minecraftforge.network.SimpleChannel;
+import org.automaticalechoes.equipset.Constants;
+import org.automaticalechoes.equipset.common.network.*;
+
+import java.util.function.BiConsumer;
 
 public class PacketHandler {
-    private static final ResourceLocation CHANNEL_NAME = new ResourceLocation(EquipSet.MODID,"network");
-    private static final String PROTOCOL_VERSION = new ResourceLocation(EquipSet.MODID,"1").toString();
+    private static final ResourceLocation CHANNEL_NAME = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID,"network");
+    private static final int PROTOCOL_VERSION = 1;
     public static SimpleChannel RegisterPacket(){
-        final SimpleChannel INSTANCE = NetworkRegistry.ChannelBuilder.named(CHANNEL_NAME)
-                .clientAcceptedVersions(version -> true)
-                .serverAcceptedVersions(version -> true)
-                .networkProtocolVersion(()->PROTOCOL_VERSION)
+        final SimpleChannel INSTANCE = ChannelBuilder.named(CHANNEL_NAME)
+                .clientAcceptedVersions(Channel.VersionTest.exact(PROTOCOL_VERSION))
+                .serverAcceptedVersions(Channel.VersionTest.exact(PROTOCOL_VERSION))
+                .networkProtocolVersion(PROTOCOL_VERSION)
                 .simpleChannel();
-        CommonModEvents.NetWork=INSTANCE;
-        INSTANCE.messageBuilder(ForgeFeedBack.class,1)
-                .encoder(ForgeFeedBack::encode)
-                .decoder(ForgeFeedBack::decode)
-                .consumerMainThread(ForgeFeedBack::onMessage)
+        INSTANCE.messageBuilder(FeedBack.class,1)
+                .codec(FeedBack.CODEC)
+                .consumerMainThread((feedBack, context) -> feedBack.handleMessage())
                 .add();
-        INSTANCE.messageBuilder(ForgeUpdatePreset.class,3)
-                .encoder(ForgeUpdatePreset::encode)
-                .decoder(ForgeUpdatePreset::decode)
-                .consumerMainThread(ForgeUpdatePreset::onMessage)
+        INSTANCE.messageBuilder(SendServerConfig.class,3)
+                .codec(SendServerConfig.CODEC)
+                .consumerMainThread((sendServerConfig, context) -> sendServerConfig.handleMessage())
                 .add();
-        INSTANCE.messageBuilder(ForgeUpdatePresetPartStatus.class,4)
-                .encoder(ForgeUpdatePresetPartStatus::encode)
-                .decoder(ForgeUpdatePresetPartStatus::decode)
-                .consumerMainThread(ForgeUpdatePresetPartStatus::onMessage)
+        INSTANCE.messageBuilder(UpdatePresetPartStatus.class,4)
+                .codec(UpdatePresetPartStatus.CODEC)
+                .consumerMainThread((updatePresetPartStatus, context) -> updatePresetPartStatus.handleMessage(context.getSender()))
                 .add();
-        INSTANCE.messageBuilder(ForgeUpdateSetName.class,5)
-                .encoder(ForgeUpdateSetName::encode)
-                .decoder(ForgeUpdateSetName::decode)
-                .consumerMainThread(ForgeUpdateSetName::onMessage)
+        INSTANCE.messageBuilder(UpdateSetName.class,5)
+                .codec(UpdateSetName.CODEC)
+                .consumerMainThread((updateSetName, context) -> updateSetName.handleMessage(context.getSender()))
                 .add();
-//        INSTANCE.messageBuilder(ForgeAskConfig.class,6)
-//                .encoder(ForgeAskConfig::encode)
-//                .decoder(ForgeAskConfig::decode)
-//                .consumerMainThread(ForgeAskConfig::onMessage)
-//                .add();
-        INSTANCE.messageBuilder(ForgeSendServerConfig.class,7)
-                .encoder(ForgeSendServerConfig::encode)
-                .decoder(ForgeSendServerConfig::decode)
-                .consumerMainThread(ForgeSendServerConfig::onMessage)
+        INSTANCE.messageBuilder(UpdatePreset.class,7)
+                .codec(UpdatePreset.CODEC)
+                .consumerMainThread((updatePreset, context) -> updatePreset.handleMessage(context.getSender()))
                 .add();
         return INSTANCE;
     }

@@ -1,43 +1,43 @@
 package org.automaticalechoes.equipset.NetWork.network;
 
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.SimpleChannel;
 import org.automaticalechoes.equipset.common.network.*;
 import org.automaticalechoes.equipset.config.ModGameRule;
 
-public class ForgeNetworkImp implements EquipSetNetWork {
-    public static final SimpleChannel channel = PacketHandler.RegisterPacket();
-//    public ForgeNetworkImp() {
-//
+public class FabricNetworkImp implements EquipSetNetWork {
+//    @Override
+//    public void AskConfig() {
+//        CommonModEvents.NetWork.sendToServer(new ForgeAskConfig());
 //    }
+
 
     @Override
     public void SendServerConfig(ServerPlayer serverPlayer) {
         int nums = serverPlayer.server.getWorldData().getGameRules().getRule(ModGameRule.EQUIP$NUMS).get();
-        channel.send(new SendServerConfig(nums), serverPlayer.connection.getConnection());
+        ServerPlayNetworking.send(serverPlayer, new SendServerConfig(nums));
     }
 
     @Override
     public void SendFeedBack(ServerPlayer serverPlayer, Component component) {
-        channel.send(new FeedBack(component), serverPlayer.connection.getConnection());
+        ServerPlayNetworking.send(serverPlayer, new FeedBack(component));
     }
 
     @Override
     public void SendUpdatePreset(int targetNum, int cases) {
-        channel.send(new UpdatePreset(targetNum,cases),PacketDistributor.SERVER.noArg());
+        ClientPlayNetworking.send(new UpdatePreset(targetNum, cases));
     }
 
     @Override
     public void SendUpdatePresetPartStatus(int targetNum, String partName, boolean enable) {
-        channel.send(new UpdatePresetPartStatus(targetNum,partName,enable), PacketDistributor.SERVER.noArg());
+        ClientPlayNetworking.send(new UpdatePresetPartStatus(targetNum, partName, enable));
     }
 
     @Override
     public void SendUpdateSetName(int suitNum, String suitName) {
-        channel.send(new UpdateSetName(suitNum, suitName), PacketDistributor.SERVER.noArg());
+        ClientPlayNetworking.send(new UpdateSetName(suitNum, suitName));
     }
 }
