@@ -21,7 +21,6 @@ public class Utils {
             equals = switch (i){
                 case 0 -> A.getItem().equals(B.getItem());
                 case 1 -> A.getDisplayName().getString().equals(B.getDisplayName().getString());
-//                case 3 -> A.areCapsCompatible(B);
                 default -> true;
             };
             if(!equals) break;
