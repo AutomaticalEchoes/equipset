@@ -22,7 +22,6 @@ public class ModKeyMappings {
 
 
     public static void Init(){
-        ((EquipSetOptions) Minecraft.getInstance().options).equipset$removeKeyMappings();
         KEY_MAPPING.clear();
         CALL_SET_INVENTORY_KEY = RegisterKeyMapping(new KeyMapping("key.category.equipset.setinvetory",
                 InputConstants.KEY_B,
@@ -41,7 +40,7 @@ public class ModKeyMappings {
                             MOD_CATEGORY), () -> Actions.SendUsePreset(finalI));
                 }
         }
-        ((EquipSetOptions) Minecraft.getInstance().options).equipset$loadKeyMappings();
+        ((EquipSetOptions) Minecraft.getInstance().options).equipset$loadKeyMappingsDiff();
     }
 
     public static KeyMapping RegisterKeyMapping(KeyMapping keyMapping, Runnable runnable){

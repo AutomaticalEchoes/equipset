@@ -5,8 +5,6 @@ import org.spongepowered.asm.mixin.Unique;
 public interface EquipSetOptions {
 
     @Unique
-    void equipset$loadKeyMappings();
+    void equipset$loadKeyMappingsDiff();
 
-    @Unique
-    void equipset$removeKeyMappings();
 }

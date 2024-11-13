@@ -17,6 +17,9 @@
   "entrypoints": {
     "main": [
       "org.automaticalechoes.equipset.Equipset"
+    ],
+    "client": [
+      "org.automaticalechoes.equipset.EquipsetClient"
     ]
   },
   "mixins": [

@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.level.GameRules;
-import org.automaticalechoes.equipset.Events.ClientEvents;
 import org.automaticalechoes.equipset.NetWork.network.PacketHandler;
 import org.automaticalechoes.equipset.api.IPlayerInterface;
 import org.automaticalechoes.equipset.common.command.UsePresetCommand;
@@ -21,7 +20,6 @@ public class Equipset implements ModInitializer {
         // project.
 
         // Use Fabric to bootstrap the Common mod.
-        ClientEvents.init();
         ModGameRule.EQUIP$NUMS = GameRuleRegistry.register("equip_set_nums",
                 GameRules.Category.PLAYER, GameRuleFactory.createIntRule(4,
                         (server, integerValue) ->
