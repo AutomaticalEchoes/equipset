@@ -15,19 +15,19 @@ import java.util.*;
 
 public class Config {
     private static final Splitter OPTION_SPLITTER = Splitter.on(':').limit(2);
-    private static final String CONFIG_FILE = "config\\equipset_client_config.txt";
-    static final String EQUIP$KEY_R = "equip_set_keymapping_r";
-    static final String EQUIP$KEY_NUMS = "equip_set_keymapping_nums";
-    protected static Boolean KEYMAPPING_R = true;
-    protected static Boolean KEYMAPPING_NUMS = true;
+    private static final String CONFIG_FILE = "config\\echoes_mods_client_config.txt";
+    static final String EQUIP$KEY_QUICK_CHANGE = "equipset_key_quick_change";
+    static final String EQUIP$KEY_SELECT_CHANGE = "equipset_key_select_change";
+    protected static Boolean KEY_QUICK_CHANGE = true;
+    protected static Boolean KEY_SELECT_CHANGE = true;
 
 
     public static boolean KeymappingNums() {
-        return KEYMAPPING_NUMS;
+        return KEY_SELECT_CHANGE;
     }
 
     public static boolean KeymappingR() {
-        return KEYMAPPING_R;
+        return KEY_QUICK_CHANGE;
     }
 
 
@@ -41,8 +41,8 @@ public class Config {
             final PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(configDir), StandardCharsets.UTF_8));
 
             try {
-                printWriter.println(EQUIP$KEY_R + ":" + KEYMAPPING_R);
-                printWriter.println(EQUIP$KEY_NUMS + ":" + KEYMAPPING_NUMS);
+                printWriter.println(EQUIP$KEY_QUICK_CHANGE + ":" + KEY_QUICK_CHANGE);
+                printWriter.println(EQUIP$KEY_SELECT_CHANGE + ":" + KEY_SELECT_CHANGE);
             } catch (Throwable var5) {
                 try {
                     printWriter.close();
@@ -88,11 +88,11 @@ public class Config {
                 throw var6;
             }
             bufferedReader.close();
-            if (compoundTag.contains(EQUIP$KEY_R)) {
-                KEYMAPPING_R = isTrue(compoundTag.getString(EQUIP$KEY_R));
+            if (compoundTag.contains(EQUIP$KEY_QUICK_CHANGE)) {
+                KEY_QUICK_CHANGE = isTrue(compoundTag.getString(EQUIP$KEY_QUICK_CHANGE));
             }
-            if (compoundTag.contains(EQUIP$KEY_NUMS)) {
-                KEYMAPPING_NUMS = isTrue(compoundTag.getString(EQUIP$KEY_NUMS));
+            if (compoundTag.contains(EQUIP$KEY_SELECT_CHANGE)) {
+                KEY_SELECT_CHANGE = isTrue(compoundTag.getString(EQUIP$KEY_SELECT_CHANGE));
             }
             KeyMapping.resetMapping();
         } catch (Exception var7) {

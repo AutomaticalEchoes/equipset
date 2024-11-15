@@ -1,9 +1,7 @@
 package org.automaticalechoes.equipset.mixin;
 
 
-import com.google.common.collect.Maps;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import org.apache.commons.lang3.ArrayUtils;
 import org.automaticalechoes.equipset.api.EquipSetOptions;
@@ -11,12 +9,10 @@ import org.automaticalechoes.equipset.client.keyMapping.ModKeyMappings;
 import org.spongepowered.asm.mixin.*;
 
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 @Mixin(Options.class)
 public abstract class OptionMixin implements EquipSetOptions {
-    @Unique
-    private static boolean equipset$KeyMappingInit = false;
+
     @Mutable
     @Final
     @Shadow public KeyMapping[] keyMappings;
@@ -31,7 +27,6 @@ public abstract class OptionMixin implements EquipSetOptions {
         KeyMapping[] addon = Arrays.stream(modKeyMappings).filter(keyMapping -> Arrays.stream(registedKeyMapping).noneMatch(keyMapping1 -> keyMapping == keyMapping1)).toArray(KeyMapping[]::new);
         keyMappings = ArrayUtils.removeElements(keyMappings, removal);
         keyMappings = ArrayUtils.addAll(keyMappings, addon);
-        equipset$KeyMappingInit = true;
         load();
     }
 
