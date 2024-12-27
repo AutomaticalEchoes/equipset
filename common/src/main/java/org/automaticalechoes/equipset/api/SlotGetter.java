@@ -23,11 +23,11 @@ public class SlotGetter {
     }
 
     public ItemStack getItem(ServerPlayer serverPlayer){
-        return containerType.getContainer(serverPlayer).getItem(slotNum);
+        return containerType.getItem(serverPlayer,slotNum);
     }
 
     public void onChange(ServerPlayer serverPlayer, ItemStack itemStack){
-        containerType.getContainer(serverPlayer).setItem(slotNum,itemStack);
+        containerType.setItem(serverPlayer,slotNum,itemStack);
     }
 
     public CompoundTag toTag() {

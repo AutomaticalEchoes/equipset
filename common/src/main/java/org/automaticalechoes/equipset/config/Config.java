@@ -21,7 +21,6 @@ public class Config {
     protected static Boolean KEY_QUICK_CHANGE = true;
     protected static Boolean KEY_SELECT_CHANGE = true;
 
-
     public static boolean KeymappingNums() {
         return KEY_SELECT_CHANGE;
     }

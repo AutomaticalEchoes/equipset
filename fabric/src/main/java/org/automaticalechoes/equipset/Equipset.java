@@ -18,9 +18,12 @@ public class Equipset implements ModInitializer {
         // This method is invoked by the Fabric mod loader when it is ready
         // to load your mod. You can access Fabric and Common code in this
         // project.
-
+        ModGameRule.EQUIP$CURSE_CHECK = GameRuleRegistry.register("equipset_curse_check",
+                GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
+        ModGameRule.EQUIP$ENABLE_ENDER_CHEST_CHECK = GameRuleRegistry.register("equipset_ender_chest_check",
+                GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
         // Use Fabric to bootstrap the Common mod.
-        ModGameRule.EQUIP$NUMS = GameRuleRegistry.register("equip_set_nums",
+        ModGameRule.EQUIP$NUMS = GameRuleRegistry.register("equipset_set_nums",
                 GameRules.Category.PLAYER, GameRuleFactory.createIntRule(4,
                         (server, integerValue) ->
                                 server.getPlayerList().getPlayers().forEach(serverPlayer -> {

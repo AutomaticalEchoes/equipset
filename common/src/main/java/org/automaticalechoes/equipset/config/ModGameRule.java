@@ -7,13 +7,18 @@ import net.minecraft.world.level.GameRules;
 public class ModGameRule {
     public static GameRules.Key<GameRules.BooleanValue> EQUIP$CURSE_CHECK ;
     public static GameRules.Key<GameRules.IntegerValue> EQUIP$NUMS ;
+    public static GameRules.Key<GameRules.BooleanValue> EQUIP$ENABLE_ENDER_CHEST_CHECK ;
 
     public static boolean shouldCurseCheck(ServerPlayer player){
-        return EQUIP$CURSE_CHECK != null && player.server.getWorldData().getGameRules().getRule(ModGameRule.EQUIP$CURSE_CHECK).get();
+        return EQUIP$CURSE_CHECK != null && player.server.getWorldData().getGameRules().getRule(EQUIP$CURSE_CHECK).get();
+    }
+
+    public static boolean shouldRegisterEnderChest(ServerPlayer player){
+        return EQUIP$ENABLE_ENDER_CHEST_CHECK !=null && player.server.getWorldData().getGameRules().getRule(EQUIP$ENABLE_ENDER_CHEST_CHECK).get();
     }
 
     public static int getNums(ServerPlayer player){
-        return EQUIP$NUMS != null ? player.server.getWorldData().getGameRules().getRule(ModGameRule.EQUIP$NUMS).get() : 4 ;
+        return EQUIP$NUMS != null ? player.server.getWorldData().getGameRules().getRule(EQUIP$NUMS).get() : 4 ;
     }
 
 //    public final GameRules.Key<GameRules.BooleanValue> EQUIP$CURSE_CHECK = GameRules.register("equip_curse_check", GameRules.Category.PLAYER,  GameRules.BooleanValue.create(true));

@@ -56,7 +56,7 @@ public class PresetEquipPart {
 
     public boolean canFindPresetItem(ServerPlayer serverPlayer){
         updateLocationIfNeed(serverPlayer, settingNeed, locationRecord);
-        return !locationRecord.isEmpty();
+        return !locationRecord.isEmpty() && locationRecord.containerType.canUse(serverPlayer);
     }
 
     public boolean canFindPresetItem(ServerPlayer serverPlayer, MutableComponent component){
@@ -72,7 +72,7 @@ public class PresetEquipPart {
     }
 
     private void updateLocationIfNeed(ServerPlayer serverPlayer, ItemStack itemStack, LocationLog locationRecord){
-        if(locationRecord.isEmpty() || !Utils.CheckItemSame(locationRecord.getItem(serverPlayer), itemStack)){
+        if(locationRecord.isEmpty() || !locationRecord.containerType.canUse(serverPlayer) || !Utils.CheckItemSame(locationRecord.getItem(serverPlayer), itemStack)){
             findItemLocation(serverPlayer, itemStack)
                     .ifPresentOrElse(pair -> locationRecord.update(pair.getKey(), pair.getValue()), locationRecord::clear);
         }
@@ -80,9 +80,9 @@ public class PresetEquipPart {
 
     private Optional<Pair<ContainerType,Integer>> findItemLocation(ServerPlayer serverPlayer , ItemStack settingNeed){
         for (ContainerType value : ContainerType.TYPES.values()) {
-            Container container = value.getContainer(serverPlayer);
-            for (int i = 0; i < container.getContainerSize(); i++) {
-                if (Utils.CheckItemSame(container.getItem(i), settingNeed))
+            if(!value.canUse(serverPlayer)) continue;
+            for (int i = 0; i < value.size(serverPlayer); i++) {
+                if (Utils.CheckItemSame(value.getItem(serverPlayer,i), settingNeed))
                     return Optional.of(Pair.of(value, i));
             }
         }
