@@ -36,4 +36,9 @@ neoForge {
     }
 }
 
+dependencies {
+    compileOnly "curse.maven:travelersbackpack-neoforge-${trbp_neoforge}:${trbp_neoforge_version}"
+}
+
+
 sourceSets.main.resources { srcDir 'src/generated/resources' }

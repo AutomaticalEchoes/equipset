@@ -36,6 +36,8 @@ pluginManagement {
                 includeGroupAndSubgroups('net.minecraftforge')
             }
         }
+
+
     }
 }
 

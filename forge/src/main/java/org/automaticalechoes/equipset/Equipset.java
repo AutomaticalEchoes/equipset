@@ -27,17 +27,6 @@ public class Equipset {
         // This method is invoked by the Forge mod loader when it is ready
         // to load your mod. You can access Forge and Common code in this
         // project.
-        ModGameRule.EQUIP$CURSE_CHECK = GameRules.register()
-        ModGameRule.EQUIP$NUMS = GameRules.register("equip_set_nums",
-                GameRules.Category.PLAYER, GameRules.IntegerValue.create(4,
-                        (server, integerValue) ->
-                                server.getPlayerList().getPlayers().forEach(serverPlayer -> {
-                                    ((IPlayerInterface)serverPlayer).equipSet$resize(integerValue.get());
-                                    Constants.NETWORK.ifPresent(network -> network.SendServerConfig(serverPlayer));
-                                })
-                )
-        );
-
         Constants.NETWORK = Optional.of(new ForgeNetworkImp());
         Constants.init();
         if(ModList.get().isLoaded("travelersbackpack")){

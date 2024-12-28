@@ -1,12 +1,12 @@
 package org.automaticalechoes.equipset;
 
 
-import net.minecraft.world.level.GameRules;
+import com.tiviacz.travelersbackpack.capability.AttachmentUtils;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import org.automaticalechoes.equipset.NetWork.network.NeoForgeNetworkImp;
-import org.automaticalechoes.equipset.api.IPlayerInterface;
-import org.automaticalechoes.equipset.config.ModGameRule;
+import org.automaticalechoes.equipset.api.ContainerType;
 
 import java.util.Optional;
 
@@ -17,17 +17,15 @@ public class Equipset {
         // This method is invoked by the NeoForge mod loader when it is ready
         // to load your mod. You can access NeoForge and Common code in this
         // project.
-        ModGameRule.EQUIP$NUMS = GameRules.register("equip_set_nums",
-                GameRules.Category.PLAYER, GameRules.IntegerValue.create(4,
-                        (server, integerValue) ->
-                                server.getPlayerList().getPlayers().forEach(serverPlayer -> {
-                                    ((IPlayerInterface)serverPlayer).equipSet$resize(integerValue.get());
-                                    Constants.NETWORK.ifPresent(network -> network.SendServerConfig(serverPlayer));
-                                })
-                )
-        );
         Constants.NETWORK = Optional.of(new NeoForgeNetworkImp());
         Constants.init();
-
+        if(ModList.get().isLoaded("travelersbackpack")){
+            ContainerType.TYPE_TRAVELERSBACKPACK = new ContainerType("travelersbackpack",
+                    serverPlayer -> AttachmentUtils.getBackpackInv(serverPlayer) != null,
+                    (serverPlayer, slotNum, itemStack) -> AttachmentUtils.getBackpackInv(serverPlayer).getHandler().setStackInSlot(slotNum, itemStack),
+                    (serverPlayer, integer) -> AttachmentUtils.getBackpackInv(serverPlayer).getHandler().getStackInSlot(integer),
+                    serverPlayer -> AttachmentUtils.getBackpackInv(serverPlayer).getHandler().getSlots());
+            ContainerType.TYPES.put(ContainerType.TYPE_TRAVELERSBACKPACK.Name(), ContainerType.TYPE_TRAVELERSBACKPACK);
+        }
     }
 }

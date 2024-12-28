@@ -66,12 +66,14 @@ minecraft {
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
+
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-    compileOnly files("lib/travelersbackpack-forge-1.21-10.0.0.jar")
     // Forge's hack fix
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
+    compileOnly api("curse.maven:travelersbackpack-forge-${trbp_forge}:${trbp_forge_version}")
 }
 
 publishing {
@@ -87,3 +89,5 @@ sourceSets.each {
     it.output.resourcesDir = dir
     it.java.destinationDirectory = dir
 }
+
+
